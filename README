@@ -1,0 +1,190 @@
+# 🧠 NeuralCode — AI-Powered Coding Mentor
+
+> Final Year Project | B.Tech Computer Science & Engineering
+> An AI coding tutor for absolute beginners powered by Groq (Llama 3.3) + Node.js + MongoDB
+
+---
+
+## 🌟 Live Demo
+🔗 **[neuralcode.vercel.app](https://neuralcode.vercel.app)**
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🔐 **Auth System** | Register, login, logout with JWT and bcrypt |
+| 🤖 **AI Mentor Chat** | 4 modes — Explain, Debug, Challenge, ELI5 |
+| 🎯 **AI Quiz Generator** | Dynamic quizzes generated fresh every session |
+| 🔍 **AI Code Reviewer** | Score, grade and feedback on your code |
+| 🗺️ **Learning Roadmap** | Step-by-step JavaScript curriculum |
+| ⚡ **XP and Gamification** | Points, levels, streaks, achievements |
+| 📱 **Fully Responsive** | Works on mobile, tablet and desktop |
+| 🗄️ **MongoDB Database** | All user data persisted in the cloud |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas with Mongoose |
+| AI Engine | Groq API — Llama 3.3 70B |
+| Auth | JWT jsonwebtoken + bcryptjs |
+| Deployment | Vercel |
+
+---
+
+## 📁 Project Structure
+
+```
+neuralcode/
+├── server.js          ← Express backend (auth + AI proxy routes)
+├── package.json       ← Node dependencies
+├── .env               ← Environment variables (never commit this)
+├── .gitignore         ← Files excluded from Git
+├── README.md          ← This file
+└── Public/
+    └── index.html     ← Complete frontend single page app
+```
+
+---
+
+## 🚀 Local Setup
+
+### Prerequisites
+- Node.js v18 or higher
+- MongoDB Atlas free account
+- Groq API key from console.groq.com (free)
+
+### Step 1 — Clone the repo
+```bash
+git clone https://github.com/YOURNAME/neuralcode.git
+cd neuralcode
+```
+
+### Step 2 — Install dependencies
+```bash
+npm install
+```
+
+### Step 3 — Create .env file
+```env
+GROQ_API_KEY=your_groq_api_key_here
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/neuralcode
+JWT_SECRET=your_secret_key_here
+PORT=3001
+```
+
+### Step 4 — Run the server
+```bash
+node server.js
+```
+
+### Step 5 — Open in browser
+```
+http://localhost:3001
+```
+
+---
+
+## 🌐 Deploy to Vercel
+
+```bash
+git add .
+git commit -m "deploy"
+git push
+```
+
+Then go to vercel.com, import your repo and add these environment variables:
+- GROQ_API_KEY
+- MONGO_URI
+- JWT_SECRET
+
+---
+
+## 🔐 Security Features
+
+- Passwords hashed with bcrypt cost factor 12
+- JWT tokens expire after 7 days
+- All AI routes require valid authentication
+- Groq API key stored server-side only, never exposed to browser
+- MongoDB injection blocked by input validation regex
+- CORS configured for cross-origin requests
+
+---
+
+## 📊 API Endpoints
+
+| Method | Route | Auth Required | Description |
+|---|---|---|---|
+| POST | /auth/register | No | Create new account |
+| POST | /auth/login | No | Login and get JWT token |
+| GET | /auth/me | Yes | Get current user data |
+| PATCH | /user/progress | Yes | Save XP and progress |
+| POST | /api/chat | Yes | Get AI mentor response |
+| POST | /api/quiz | Yes | Generate quiz questions |
+| POST | /api/review | Yes | Review submitted code |
+
+---
+
+## 🤖 AI Chat Modes
+
+| Mode | Behaviour |
+|---|---|
+| Explain | Beginner analogies with code examples |
+| Debug | Find bugs and explain fix in plain English |
+| Challenge | Generate achievable beginner coding tasks |
+| ELI5 | Explain Like I am 5 using everyday analogies |
+
+---
+
+## 📋 Test Results
+
+| Test | Result |
+|---|---|
+| Unauthenticated API access blocked | Pass |
+| Fake JWT token rejected | Pass |
+| Passwords hashed in database | Pass |
+| Duplicate email registration blocked | Pass |
+| Wrong password blocked | Pass |
+| NoSQL injection blocked | Pass |
+| User saves to MongoDB | Pass |
+| XP persists to database | Pass |
+| JWT auto-login on page refresh | Pass |
+
+---
+
+## 🔮 Future Enhancements
+
+- Streaming AI responses word by word like ChatGPT
+- Code execution sandbox using Judge0 API
+- Dark mode toggle
+- Daily streak email reminders
+- Mobile PWA installable on phone
+- Leaderboard and social features
+
+---
+
+## 📄 Project Documentation
+
+| Document | Description |
+|---|---|
+| NeuralCode_SRS.docx | Software Requirements Specification |
+| NeuralCode_Project_Report.docx | Full final year project report |
+| NeuralCode_Test_Plan.docx | Complete test plan with 53 test cases |
+
+---
+
+## 👨‍💻 Author
+
+Final Year B.Tech Project — Computer Science and Engineering
+
+Built with Node.js, MongoDB, Groq AI and Vanilla JavaScript
+
+## 📝 License
+
+MIT License — free to use, modify and distribute
