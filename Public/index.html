@@ -9,40 +9,16 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#f5f4ff;
-  --white:#ffffff;
-  --surface:#f0eeff;
-  --surface2:#e6e1ff;
-  --border:#e0daf8;
-  --border2:#c5bcf5;
-  --purple:#6c47ff;
-  --purple-d:#5535e8;
-  --purple-l:#ede9ff;
-  --teal:#00c9a7;
-  --teal-l:#e0faf5;
-  --orange:#ff7043;
-  --orange-l:#fff0ec;
-  --gold:#f5a623;
-  --gold-l:#fff8e6;
-  --red:#ff4d6a;
-  --red-l:#fff0f2;
-  --green:#22c55e;
-  --green-l:#f0fdf4;
-  --text:#1a1535;
-  --text2:#6b6490;
-  --text3:#a99fc8;
-  --font:'Plus Jakarta Sans',sans-serif;
-  --mono:'JetBrains Mono',monospace;
-  --r:12px;
-  --r2:18px;
-  --r3:24px;
-  --sh:0 2px 12px rgba(108,71,255,0.08);
-  --sh2:0 8px 32px rgba(108,71,255,0.16);
+  --bg:#f5f4ff;--white:#ffffff;--surface:#f0eeff;--surface2:#e6e1ff;
+  --border:#e0daf8;--border2:#c5bcf5;--purple:#6c47ff;--purple-d:#5535e8;
+  --purple-l:#ede9ff;--teal:#00c9a7;--teal-l:#e0faf5;--orange:#ff7043;
+  --orange-l:#fff0ec;--gold:#f5a623;--gold-l:#fff8e6;--red:#ff4d6a;
+  --red-l:#fff0f2;--green:#22c55e;--green-l:#f0fdf4;--text:#1a1535;
+  --text2:#6b6490;--text3:#a99fc8;--font:'Plus Jakarta Sans',sans-serif;
+  --mono:'JetBrains Mono',monospace;--r:12px;--r2:18px;--r3:24px;
+  --sh:0 2px 12px rgba(108,71,255,0.08);--sh2:0 8px 32px rgba(108,71,255,0.16);
 }
-
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
-
-/* ===== UTILITIES ===== */
 .hidden{display:none!important}
 .btn{background:var(--white);border:1.5px solid var(--border2);color:var(--text);padding:9px 18px;border-radius:10px;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{border-color:var(--purple);color:var(--purple)}
@@ -51,20 +27,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .btn-sm{padding:6px 13px;font-size:12px;border-radius:8px}
 .tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:var(--mono)}
 
-/* ===== AUTH SCREENS ===== */
-#authScreen{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(145deg,#f5f4ff 0%,#ede9ff 50%,#e0faf5 100%);
-  padding:20px;
-}
-.auth-card{
-  background:var(--white);border-radius:var(--r3);box-shadow:var(--sh2);
-  width:100%;max-width:440px;overflow:hidden;
-}
-.auth-brand{
-  background:linear-gradient(135deg,var(--purple) 0%,#9b7dff 60%,var(--teal) 100%);
-  padding:32px 36px 28px;color:white;text-align:center;
-}
+/* AUTH */
+#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#f5f4ff 0%,#ede9ff 50%,#e0faf5 100%);padding:20px}
+.auth-card{background:var(--white);border-radius:var(--r3);box-shadow:var(--sh2);width:100%;max-width:440px;overflow:hidden}
+.auth-brand{background:linear-gradient(135deg,var(--purple) 0%,#9b7dff 60%,var(--teal) 100%);padding:32px 36px 28px;color:white;text-align:center}
 .auth-brand .brand-logo{font-size:36px;margin-bottom:8px}
 .auth-brand h1{font-size:22px;font-weight:800;margin-bottom:4px}
 .auth-brand p{font-size:13px;opacity:.85}
@@ -74,17 +40,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .auth-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px}
-.form-group input{
-  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
-  font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);outline:none;transition:all .2s;
-}
+.form-group input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);outline:none;transition:all .2s}
 .form-group input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(108,71,255,.1);background:var(--white)}
 .form-group input::placeholder{color:var(--text3)}
-.auth-submit{
-  width:100%;padding:13px;background:linear-gradient(135deg,var(--purple),var(--purple-d));
-  border:none;border-radius:12px;color:white;font-family:var(--font);font-size:15px;font-weight:700;
-  cursor:pointer;transition:all .2s;margin-top:6px;
-}
+.auth-submit{width:100%;padding:13px;background:linear-gradient(135deg,var(--purple),var(--purple-d));border:none;border-radius:12px;color:white;font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:6px}
 .auth-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,71,255,.35)}
 .auth-submit:disabled{opacity:.5;pointer-events:none}
 .auth-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--text3);font-size:12px}
@@ -101,15 +60,33 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .strength-bar{height:4px;border-radius:4px;background:var(--border);margin-top:6px;overflow:hidden}
 .strength-fill{height:100%;border-radius:4px;transition:all .4s;width:0}
 
-/* ===== APP SHELL ===== */
+/* HISTORY */
+.h-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:12px}
+.h-card:hover{border-color:var(--purple);transform:translateY(-1px);box-shadow:var(--sh2)}
+.h-card-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.h-card-body{flex:1;min-width:0}
+.h-card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-card-preview{font-size:12px;color:var(--text2);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-card-meta{font-size:11px;color:var(--text3);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.h-badge{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--mono)}
+.h-badge-chat{background:var(--purple-l);color:var(--purple)}
+.h-badge-quiz{background:var(--teal-l);color:var(--teal)}
+.h-msg{padding:10px 14px;border-radius:var(--r);margin-bottom:8px;font-size:13px;line-height:1.6}
+.h-msg-user{background:var(--purple-l);border-left:3px solid var(--purple)}
+.h-msg-ai{background:var(--surface);border-left:3px solid var(--teal)}
+.h-msg-role{font-size:11px;font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)}
+.h-empty{text-align:center;padding:50px 20px;color:var(--text2)}
+.h-empty-icon{font-size:40px;margin-bottom:12px}
+.h-del-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:6px;transition:all .2s;flex-shrink:0}
+.h-del-btn:hover{background:var(--red-l);color:var(--red)}
+.h-tab-btn{padding:8px 20px;border-radius:20px;border:1.5px solid var(--border2);background:var(--bg);color:var(--text2);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.h-tab-btn.active{background:var(--purple);color:white;border-color:var(--purple)}
+.h-tab-btn.active-teal{background:var(--teal);color:white;border-color:var(--teal)}
+
+/* APP SHELL */
 #appShell{display:none;min-height:100vh;flex-direction:column}
 #appShell.visible{display:flex}
-
-/* TOPBAR */
-.topbar{
-  height:58px;background:var(--white);border-bottom:1.5px solid var(--border);
-  display:flex;align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:200;
-}
+.topbar{height:58px;background:var(--white);border-bottom:1.5px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:200}
 .topbar-logo{font-size:17px;font-weight:800;color:var(--text);white-space:nowrap}
 .topbar-logo span{color:var(--purple)}
 .hamburger{background:none;border:none;cursor:pointer;padding:6px;color:var(--text2);display:none}
@@ -125,22 +102,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .um-item:hover{background:var(--surface)}
 .um-item svg{width:16px;height:16px;color:var(--text2)}
 .um-sep{height:1px;background:var(--border);margin:4px 0}
-
-/* LAYOUT */
 .app-body{display:flex;flex:1;overflow:hidden;height:calc(100vh - 58px)}
-
-/* SIDEBAR */
-.sidebar{
-  width:220px;background:var(--white);border-right:1.5px solid var(--border);
-  display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;
-  transition:transform .3s ease;
-}
+.sidebar{width:220px;background:var(--white);border-right:1.5px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;transition:transform .3s ease}
 .sidebar::-webkit-scrollbar{width:0}
 .s-section{padding:14px 12px 6px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--text3)}
-.s-item{
-  display:flex;align-items:center;gap:10px;padding:10px 14px;margin:1px 8px;
-  border-radius:10px;cursor:pointer;transition:all .2s;color:var(--text2);font-size:13.5px;font-weight:500;
-}
+.s-item{display:flex;align-items:center;gap:10px;padding:10px 14px;margin:1px 8px;border-radius:10px;cursor:pointer;transition:all .2s;color:var(--text2);font-size:13.5px;font-weight:500}
 .s-item:hover{background:var(--surface);color:var(--text)}
 .s-item.active{background:var(--purple-l);color:var(--purple);font-weight:700}
 .s-item svg{width:18px;height:18px;flex-shrink:0}
@@ -150,29 +116,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .sf-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--teal));color:white;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sf-name{font-size:13px;font-weight:700;color:var(--text)}
 .sf-role{font-size:11px;color:var(--text2)}
-
-/* MAIN CONTENT */
 .main-content{flex:1;overflow-y:auto;padding:24px;background:var(--bg)}
 .main-content::-webkit-scrollbar{width:6px}
 .main-content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-
-/* ===== PAGE COMPONENTS ===== */
 .page{display:none;flex-direction:column;gap:20px;animation:fadeUp .3s ease}
 .page.active{display:flex}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
 .section-hd{margin-bottom:18px}
 .section-hd h2{font-size:22px;font-weight:800;letter-spacing:-.5px}
 .section-hd p{font-size:13.5px;color:var(--text2);margin-top:3px}
-
 .card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:20px;box-shadow:var(--sh)}
 .card-title{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);margin-bottom:14px;display:flex;align-items:center;gap:7px}
-
-/* HERO */
-.hero{
-  background:linear-gradient(135deg,#6c47ff 0%,#9b7dff 55%,#00c9a7 100%);
-  border-radius:var(--r3);padding:32px 36px;color:white;position:relative;overflow:hidden;
-}
+.hero{background:linear-gradient(135deg,#6c47ff 0%,#9b7dff 55%,#00c9a7 100%);border-radius:var(--r3);padding:32px 36px;color:white;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-70px;right:-70px;width:260px;height:260px;background:rgba(255,255,255,.07);border-radius:50%}
 .hero::after{content:'';position:absolute;bottom:-50px;left:180px;width:160px;height:160px;background:rgba(255,255,255,.05);border-radius:50%}
 .hero h1{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:8px;position:relative}
@@ -182,30 +137,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .btn-ghost{background:rgba(255,255,255,.18);color:white;border:1.5px solid rgba(255,255,255,.3);padding:10px 18px;border-radius:10px;font-family:var(--font);font-weight:600;font-size:13.5px;cursor:pointer;transition:all .2s}
 .btn-ghost:hover{background:rgba(255,255,255,.28)}
-
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .stat-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:16px 18px;box-shadow:var(--sh);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:default}
 .stat-card:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
 .stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 var(--r2) var(--r2)}
-.sc-purple::after{background:var(--purple)}
-.sc-teal::after{background:var(--teal)}
-.sc-gold::after{background:var(--gold)}
-.sc-orange::after{background:var(--orange)}
+.sc-purple::after{background:var(--purple)}.sc-teal::after{background:var(--teal)}.sc-gold::after{background:var(--gold)}.sc-orange::after{background:var(--orange)}
 .stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:8px}
 .stat-val{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}
 .stat-lbl{font-size:11.5px;color:var(--text2);font-weight:500}
-
-/* GRID */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-/* PROGRESS */
 .pbar{background:var(--surface2);border-radius:6px;height:6px;overflow:hidden}
 .pbar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--purple),var(--teal));transition:width 1s ease}
 .prog-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
 .prog-row span:last-child{font-family:var(--mono);font-weight:700;color:var(--purple)}
-
-/* CHAT */
 .chat-layout{display:grid;grid-template-columns:190px 1fr;gap:16px;height:540px}
 .mode-list{display:flex;flex-direction:column;gap:7px}
 .mode-btn{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s}
@@ -215,7 +159,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .mode-btn .mb-n{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
 .mode-btn.active .mb-n{color:var(--purple)}
 .mode-btn .mb-d{font-size:11px;color:var(--text2);line-height:1.4}
-
 .chat-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--sh)}
 .chat-hd{padding:13px 16px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
 .chat-hd-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--purple),#9b7dff);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -223,7 +166,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .chat-hd-sub{font-size:11.5px;color:var(--text2)}
 .online-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);margin-left:auto;box-shadow:0 0 0 3px rgba(0,201,167,.2);animation:opulse 2s infinite}
 @keyframes opulse{0%,100%{box-shadow:0 0 0 3px rgba(0,201,167,.2)}50%{box-shadow:0 0 0 6px rgba(0,201,167,.07)}}
-
 .msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:13px}
 .msgs::-webkit-scrollbar{width:4px}
 .msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
@@ -238,20 +180,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .msg-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--purple);background:var(--purple-l);padding:2px 8px;border-radius:20px;display:inline-flex;margin-bottom:4px;font-family:var(--mono)}
 .msg-code{background:#1e1b2e;border-radius:9px;padding:11px 13px;margin-top:7px;font-family:var(--mono);font-size:11.5px;line-height:1.7;color:#a8d8a8;overflow-x:auto}
 .msg-icode{background:var(--surface2);padding:1px 6px;border-radius:4px;font-family:var(--mono);font-size:11px;color:var(--purple);font-weight:600}
-
 .typing-wrap{padding:0 14px 8px;display:none}
 .typing{display:inline-flex;gap:5px;align-items:center;padding:9px 13px;background:var(--surface);border:1.5px solid var(--border);border-radius:5px 14px 14px 14px}
 .typing span{width:7px;height:7px;border-radius:50%;background:var(--purple);opacity:.4;animation:ty 1.2s infinite}
 .typing span:nth-child(2){animation-delay:.2s;background:var(--teal)}
 .typing span:nth-child(3){animation-delay:.4s}
 @keyframes ty{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-7px);opacity:1}}
-
 .chips-wrap{padding:8px 14px;border-top:1.5px solid var(--border);background:var(--bg)}
 .chips-lbl{font-size:11px;color:var(--text3);font-weight:600;margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{background:var(--white);border:1.5px solid var(--border);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--text2)}
 .chip:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-l)}
-
 .chat-inp{padding:10px 12px;border-top:1.5px solid var(--border);display:flex;gap:9px;background:var(--white);flex-shrink:0}
 .chat-inp textarea{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:9px 13px;font-family:var(--font);font-size:13.5px;color:var(--text);resize:none;height:42px;outline:none;transition:all .2s;line-height:1.5}
 .chat-inp textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(108,71,255,.1);height:80px}
@@ -260,8 +199,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .send-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(108,71,255,.35)}
 .send-btn:disabled{opacity:.4;pointer-events:none}
 .send-btn svg{width:17px;height:17px;stroke:white;fill:none;stroke-width:2.2}
-
-/* QUIZ */
 .topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
 .topic-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:18px;cursor:pointer;transition:all .25s;position:relative}
 .topic-card:hover{border-color:var(--purple);transform:translateY(-3px);box-shadow:var(--sh2)}
@@ -269,10 +206,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .tc-nm{font-size:14.5px;font-weight:700;margin-bottom:3px}
 .tc-sb{font-size:12px;color:var(--text2);line-height:1.4}
 .tc-diff{position:absolute;top:11px;right:11px;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:var(--mono)}
-.d-beg{background:var(--teal-l);color:#008572}
-.d-easy{background:var(--green-l);color:var(--green)}
-.d-med{background:var(--gold-l);color:#c88a00}
-
+.d-beg{background:var(--teal-l);color:#008572}.d-easy{background:var(--green-l);color:var(--green)}.d-med{background:var(--gold-l);color:#c88a00}
 .quiz-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:26px;max-width:640px;margin:0 auto;box-shadow:var(--sh)}
 .q-ptrack{height:5px;background:var(--surface2);border-radius:5px;margin-bottom:20px;overflow:hidden}
 .q-pbar{height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:5px;transition:width .5s ease}
@@ -285,13 +219,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .q-opt:hover{border-color:var(--purple);background:var(--purple-l)}
 .q-opt.correct{border-color:var(--teal);background:var(--teal-l);color:#006b57}
 .q-opt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red)}
-.q-opt.disabled{pointer-events:none}
 .opt-k{width:28px;height:28px;border-radius:7px;background:var(--white);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11.5px;font-weight:700;flex-shrink:0;color:var(--text2)}
 .q-opt.correct .opt-k{border-color:var(--teal);background:var(--teal);color:white}
 .q-opt.wrong .opt-k{border-color:var(--red);background:var(--red);color:white}
 .q-explain{background:var(--surface);border:1.5px solid var(--border);border-left:3px solid var(--teal);border-radius:var(--r);padding:12px 15px;margin-top:14px;font-size:13px;line-height:1.65;color:var(--text2)}
 .q-actions{display:flex;justify-content:flex-end;margin-top:16px}
-
 .result-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r3);padding:32px;max-width:440px;margin:0 auto;text-align:center;box-shadow:var(--sh2)}
 .r-emoji{font-size:52px;margin-bottom:10px}
 .r-title{font-size:22px;font-weight:800;margin-bottom:5px}
@@ -300,8 +232,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .r-cell{background:var(--bg);border-radius:var(--r);padding:13px 10px;text-align:center}
 .r-val{font-size:24px;font-weight:800;font-family:var(--mono);line-height:1}
 .r-lbl{font-size:11px;color:var(--text2);font-weight:500;margin-top:3px}
-
-/* CODE REVIEW */
 .rev-box{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh)}
 .rev-tabs{display:flex;background:var(--bg);border-bottom:1.5px solid var(--border)}
 .rev-tab{padding:11px 16px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text2);border-bottom:2.5px solid transparent;transition:all .2s;font-family:var(--mono)}
@@ -337,8 +267,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .rw-block{margin-top:14px}
 .rw-block h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);margin-bottom:7px}
 .rw-code{background:#1e1b2e;border-radius:9px;padding:13px 15px;font-family:var(--mono);font-size:12px;color:#a8d8a8;overflow-x:auto;line-height:1.75;border:1.5px solid #2d2a42}
-
-/* ROADMAP */
 .rm-steps{display:flex;flex-direction:column}
 .rm-row{display:flex;gap:13px;padding-bottom:18px}
 .rm-row:last-child{padding-bottom:0}
@@ -356,51 +284,21 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .rm-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
 .rm-chip{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:2px 9px;font-size:11px;font-family:var(--mono);color:var(--text2)}
 .now-badge{background:var(--purple);color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:var(--mono)}
-
-/* TIP BOX */
 .tip-box{background:var(--teal-l);border:1.5px solid #00c9a730;border-radius:var(--r);padding:12px 15px;font-size:13px;line-height:1.6;color:#005f50;display:flex;gap:9px;margin-bottom:14px}
 .tip-box .ti{font-size:16px;flex-shrink:0}
-
-/* TOAST */
 .toast{position:fixed;bottom:22px;right:22px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:12px 16px;font-size:13.5px;font-weight:500;display:none;align-items:center;gap:9px;z-index:999;box-shadow:var(--sh2);animation:tin .3s ease}
 .toast.show{display:flex}
 @keyframes tin{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
-
-/* SIDEBAR OVERLAY (mobile) */
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:150}
 .sidebar-overlay.show{display:block}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:1024px){
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-  .topic-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  .sidebar{position:fixed;left:0;top:58px;height:calc(100vh - 58px);z-index:160;transform:translateX(-100%);width:240px}
-  .sidebar.open{transform:translateX(0)}
-  .hamburger{display:flex}
-  .main-content{padding:16px}
-  .chat-layout{grid-template-columns:1fr;height:auto}
-  .mode-list{display:none}
-  .chat-box{height:500px}
-  .hero{padding:22px 20px}
-  .hero h1{font-size:20px}
-  .g2{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr 1fr}
-  .xp-pill,.streak-pill{display:none}
-}
-@media(max-width:480px){
-  .topic-grid{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr}
-  .r-metrics,.metrics-row,.result-metrics{grid-template-columns:1fr 1fr}
-  .hero-btns{flex-direction:column}
-  .btn-white,.btn-ghost{width:100%;justify-content:center}
-}
+@media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr)}.topic-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.sidebar{position:fixed;left:0;top:58px;height:calc(100vh - 58px);z-index:160;transform:translateX(-100%);width:240px}.sidebar.open{transform:translateX(0)}.hamburger{display:flex}.main-content{padding:16px}.chat-layout{grid-template-columns:1fr;height:auto}.mode-list{display:none}.chat-box{height:500px}.hero{padding:22px 20px}.hero h1{font-size:20px}.g2{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr 1fr}.xp-pill,.streak-pill{display:none}}
+@media(max-width:480px){.topic-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr}.r-metrics,.metrics-row{grid-template-columns:1fr 1fr}.hero-btns{flex-direction:column}.btn-white,.btn-ghost{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
 
-<!-- ████ AUTH SCREEN ████ -->
+<!-- AUTH SCREEN -->
 <div id="authScreen">
   <div class="auth-card">
     <div class="auth-brand">
@@ -413,70 +311,25 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="auth-tab active" onclick="switchTab('login')">Sign In</div>
         <div class="auth-tab" onclick="switchTab('register')">Create Account</div>
       </div>
-
-      <!-- LOGIN FORM -->
       <div id="loginForm">
         <div class="auth-error" id="loginErr"></div>
         <div class="auth-success" id="loginSuccess"></div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <div class="password-wrap">
-            <input type="password" id="loginPw" placeholder="Enter your password" autocomplete="current-password">
-            <button class="toggle-pw" type="button" onclick="togglePw('loginPw',this)">👁</button>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:flex-end;margin:-8px 0 12px">
-          <a href="#" onclick="forgotPassword()" style="font-size:12.5px;color:var(--purple);text-decoration:none;font-weight:600">Forgot password?</a>
-        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email"></div>
+        <div class="form-group"><label>Password</label><div class="password-wrap"><input type="password" id="loginPw" placeholder="Enter your password" autocomplete="current-password"><button class="toggle-pw" type="button" onclick="togglePw('loginPw',this)">👁</button></div></div>
+        <div style="display:flex;justify-content:flex-end;margin:-8px 0 12px"><a href="#" onclick="forgotPassword()" style="font-size:12.5px;color:var(--purple);text-decoration:none;font-weight:600">Forgot password?</a></div>
         <button class="auth-submit" id="loginBtn" onclick="doLogin()">Sign In →</button>
         <div class="auth-divider">or continue with</div>
-        <button class="social-btn" onclick="demoLogin()">
-          <span style="font-size:18px">⚡</span> Continue as Guest (Demo)
-        </button>
+        <button class="social-btn" onclick="demoLogin()"><span style="font-size:18px">⚡</span> Continue as Guest (Demo)</button>
         <div class="terms-text">By signing in you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></div>
       </div>
-
-      <!-- REGISTER FORM -->
       <div id="registerForm" style="display:none">
         <div class="auth-error" id="regErr"></div>
         <div class="auth-success" id="regSuccess"></div>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="regName" placeholder="Your full name" autocomplete="name">
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <div class="password-wrap">
-            <input type="password" id="regPw" placeholder="Create a strong password" oninput="checkStrength(this.value)" autocomplete="new-password">
-            <button class="toggle-pw" type="button" onclick="togglePw('regPw',this)">👁</button>
-          </div>
-          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
-          <div style="font-size:11px;color:var(--text2);margin-top:3px" id="strengthLabel"></div>
-        </div>
-        <div class="form-group">
-          <label>Confirm Password</label>
-          <div class="password-wrap">
-            <input type="password" id="regPw2" placeholder="Repeat your password" autocomplete="new-password">
-            <button class="toggle-pw" type="button" onclick="togglePw('regPw2',this)">👁</button>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>I am a...</label>
-          <select id="regRole" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);outline:none">
-            <option value="student">Student (School / College)</option>
-            <option value="self">Self-taught Learner</option>
-            <option value="career">Career Changer</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="regName" placeholder="Your full name" autocomplete="name"></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email"></div>
+        <div class="form-group"><label>Password</label><div class="password-wrap"><input type="password" id="regPw" placeholder="Create a strong password" oninput="checkStrength(this.value)" autocomplete="new-password"><button class="toggle-pw" type="button" onclick="togglePw('regPw',this)">👁</button></div><div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div><div style="font-size:11px;color:var(--text2);margin-top:3px" id="strengthLabel"></div></div>
+        <div class="form-group"><label>Confirm Password</label><div class="password-wrap"><input type="password" id="regPw2" placeholder="Repeat your password" autocomplete="new-password"><button class="toggle-pw" type="button" onclick="togglePw('regPw2',this)">👁</button></div></div>
+        <div class="form-group"><label>I am a...</label><select id="regRole" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);outline:none"><option value="student">Student (School / College)</option><option value="self">Self-taught Learner</option><option value="career">Career Changer</option><option value="other">Other</option></select></div>
         <button class="auth-submit" id="regBtn" onclick="doRegister()">Create Account →</button>
         <div class="terms-text">By registering you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></div>
       </div>
@@ -484,415 +337,186 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
-<!-- ████ APP SHELL ████ -->
+<!-- APP SHELL -->
 <div id="appShell">
-  <!-- TOPBAR -->
   <header class="topbar">
-    <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     <div class="topbar-logo">Neural<span>Code</span></div>
     <div class="topbar-right">
       <span class="xp-pill">⚡ <span id="xpVal">0</span> XP</span>
       <span class="streak-pill">🔥 <span id="streakVal">1</span>d</span>
       <span class="level-pill" id="levelPill">Beginner</span>
       <div style="position:relative">
-        <button class="avatar-btn" id="avatarBtn" onclick="toggleMenu()">
-          <span id="avatarLetter">A</span>
-        </button>
+        <button class="avatar-btn" id="avatarBtn" onclick="toggleMenu()"><span id="avatarLetter">A</span></button>
         <div class="user-menu" id="userMenu">
-          <div class="um-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            <span id="menuName">Profile</span>
-          </div>
+          <div class="um-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span id="menuName">Profile</span></div>
           <div class="um-sep"></div>
-          <div class="um-item" onclick="doLogout()" style="color:var(--red)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-            Sign Out
-          </div>
+          <div class="um-item" onclick="doLogout()" style="color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Sign Out</div>
         </div>
       </div>
     </div>
   </header>
-
   <div class="app-body">
-    <!-- SIDEBAR OVERLAY -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-    <!-- SIDEBAR -->
     <nav class="sidebar" id="sidebar">
       <div class="s-section">Main</div>
-      <div class="s-item active" onclick="goPage('home',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Dashboard
-      </div>
-      <div class="s-item" onclick="goPage('chat',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        AI Mentor
-      </div>
-      <div class="s-item" onclick="goPage('quiz',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-        AI Quiz
-        <span class="s-badge">New</span>
-      </div>
-      <div class="s-item" onclick="goPage('review',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        Code Review
-      </div>
+      <div class="s-item active" onclick="goPage('home',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Dashboard</div>
+      <div class="s-item" onclick="goPage('chat',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AI Mentor</div>
+      <div class="s-item" onclick="goPage('quiz',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>AI Quiz<span class="s-badge">New</span></div>
+      <div class="s-item" onclick="goPage('review',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Code Review</div>
       <div class="s-section">Learning</div>
-      <div class="s-item" onclick="goPage('roadmap',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-        Roadmap
-      </div>
+      <div class="s-item" onclick="goPage('roadmap',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Roadmap</div>
+      <div class="s-item" onclick="goPage('history',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</div>
       <div class="sidebar-footer">
-        <div class="sf-user">
-          <div class="sf-av" id="sidebarAv">A</div>
-          <div>
-            <div class="sf-name" id="sidebarName">User</div>
-            <div class="sf-role" id="sidebarRole">Beginner</div>
-          </div>
-        </div>
+        <div class="sf-user"><div class="sf-av" id="sidebarAv">A</div><div><div class="sf-name" id="sidebarName">User</div><div class="sf-role" id="sidebarRole">Beginner</div></div></div>
       </div>
     </nav>
-
-    <!-- MAIN CONTENT -->
     <main class="main-content">
 
-      <!-- ═══ HOME ═══ -->
+      <!-- HOME -->
       <div class="page active" id="page-home">
         <div class="hero">
           <h1 id="heroGreeting">Welcome back! 👋</h1>
           <p>Your AI coding mentor is ready. Ask anything, practice with quizzes, and get your code reviewed — all explained in beginner-friendly language.</p>
-          <div class="hero-btns">
-            <button class="btn-white" id="heroMentorBtn">Ask AI Mentor →</button>
-          </div>
+          <div class="hero-btns"><button class="btn-white" id="heroMentorBtn">Ask AI Mentor →</button></div>
         </div>
-
         <div class="stats-row">
-          <div class="stat-card sc-purple">
-            <div class="stat-icon" style="background:var(--purple-l)">💬</div>
-            <div class="stat-val" style="color:var(--purple)" id="st1">0</div>
-            <div class="stat-lbl">Questions Asked</div>
-          </div>
-          <div class="stat-card sc-teal">
-            <div class="stat-icon" style="background:var(--teal-l)">🎯</div>
-            <div class="stat-val" style="color:var(--teal)" id="st2">0</div>
-            <div class="stat-lbl">Quizzes Done</div>
-          </div>
-          <div class="stat-card sc-gold">
-            <div class="stat-icon" style="background:var(--gold-l)">🔍</div>
-            <div class="stat-val" style="color:var(--gold)" id="st3">0</div>
-            <div class="stat-lbl">Code Reviews</div>
-          </div>
-          <div class="stat-card sc-orange">
-            <div class="stat-icon" style="background:var(--orange-l)">⚡</div>
-            <div class="stat-val" style="color:var(--orange)" id="st4">0</div>
-            <div class="stat-lbl">XP Earned</div>
-          </div>
+          <div class="stat-card sc-purple"><div class="stat-icon" style="background:var(--purple-l)">💬</div><div class="stat-val" style="color:var(--purple)" id="st1">0</div><div class="stat-lbl">Questions Asked</div></div>
+          <div class="stat-card sc-teal"><div class="stat-icon" style="background:var(--teal-l)">🎯</div><div class="stat-val" style="color:var(--teal)" id="st2">0</div><div class="stat-lbl">Quizzes Done</div></div>
+          <div class="stat-card sc-gold"><div class="stat-icon" style="background:var(--gold-l)">🔍</div><div class="stat-val" style="color:var(--gold)" id="st3">0</div><div class="stat-lbl">Code Reviews</div></div>
+          <div class="stat-card sc-orange"><div class="stat-icon" style="background:var(--orange-l)">⚡</div><div class="stat-val" style="color:var(--orange)" id="st4">0</div><div class="stat-lbl">XP Earned</div></div>
         </div>
-
         <div class="g2">
           <div class="card">
             <div class="card-title">📊 Your Progress</div>
             <div style="display:flex;flex-direction:column;gap:13px">
-              <div>
-                <div class="prog-row"><span>HTML & CSS</span><span id="p1v">0%</span></div>
-                <div class="pbar"><div class="pbar-fill" id="p1" style="width:0;background:linear-gradient(90deg,var(--teal),#00e5cc)"></div></div>
-              </div>
-              <div>
-                <div class="prog-row"><span>JavaScript</span><span id="p2v">0%</span></div>
-                <div class="pbar"><div class="pbar-fill" id="p2" style="width:0"></div></div>
-              </div>
-              <div>
-                <div class="prog-row"><span>Python</span><span id="p3v">0%</span></div>
-                <div class="pbar"><div class="pbar-fill" id="p3" style="width:0;background:linear-gradient(90deg,var(--orange),#ff9a00)"></div></div>
-              </div>
-              <div>
-                <div class="prog-row"><span>Algorithms</span><span id="p4v">0%</span></div>
-                <div class="pbar"><div class="pbar-fill" id="p4" style="width:0;background:linear-gradient(90deg,var(--gold),#e0a800)"></div></div>
-              </div>
+              <div><div class="prog-row"><span>HTML & CSS</span><span id="p1v">0%</span></div><div class="pbar"><div class="pbar-fill" id="p1" style="width:0;background:linear-gradient(90deg,var(--teal),#00e5cc)"></div></div></div>
+              <div><div class="prog-row"><span>JavaScript</span><span id="p2v">0%</span></div><div class="pbar"><div class="pbar-fill" id="p2" style="width:0"></div></div></div>
+              <div><div class="prog-row"><span>Python</span><span id="p3v">0%</span></div><div class="pbar"><div class="pbar-fill" id="p3" style="width:0;background:linear-gradient(90deg,var(--orange),#ff9a00)"></div></div></div>
+              <div><div class="prog-row"><span>Algorithms</span><span id="p4v">0%</span></div><div class="pbar"><div class="pbar-fill" id="p4" style="width:0;background:linear-gradient(90deg,var(--gold),#e0a800)"></div></div></div>
             </div>
           </div>
           <div class="card">
             <div class="card-title">⚡ Quick Start</div>
             <div style="display:flex;flex-direction:column;gap:9px">
-              <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('What is a variable in programming? Explain it to me like I am a complete beginner using a real-life comparison.')">
-                <div style="font-size:13px;font-weight:700;margin-bottom:2px">📌 Start: What is a Variable?</div>
-                <div style="font-size:11.5px;color:var(--text2)">The most important concept in all of programming</div>
-              </div>
-              <div style="background:var(--teal-l);border:1.5px solid #00c9a730;border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s" onclick="navTo('quiz')">
-                <div style="font-size:13px;font-weight:700;margin-bottom:2px">🎯 Take Beginner Quiz</div>
-                <div style="font-size:11.5px;color:#006b57">5 questions · ~10 min · Earn 50+ XP</div>
-              </div>
-              <div style="background:var(--purple-l);border:1.5px solid var(--border2);border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s" onclick="navTo('review')">
-                <div style="font-size:13px;font-weight:700;margin-bottom:2px">🔍 Get My Code Reviewed</div>
-                <div style="font-size:11.5px;color:var(--text2)">Paste any code · get instant AI feedback</div>
-              </div>
+              <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('What is a variable in programming? Explain it to me like I am a complete beginner using a real-life comparison.')"><div style="font-size:13px;font-weight:700;margin-bottom:2px">📌 Start: What is a Variable?</div><div style="font-size:11.5px;color:var(--text2)">The most important concept in all of programming</div></div>
+              <div style="background:var(--teal-l);border:1.5px solid #00c9a730;border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s" onclick="navTo('quiz')"><div style="font-size:13px;font-weight:700;margin-bottom:2px">🎯 Take Beginner Quiz</div><div style="font-size:11.5px;color:#006b57">5 questions · ~10 min · Earn 50+ XP</div></div>
+              <div style="background:var(--purple-l);border:1.5px solid var(--border2);border-radius:var(--r);padding:12px;cursor:pointer;transition:all .2s" onclick="navTo('review')"><div style="font-size:13px;font-weight:700;margin-bottom:2px">🔍 Get My Code Reviewed</div><div style="font-size:11.5px;color:var(--text2)">Paste any code · get instant AI feedback</div></div>
             </div>
           </div>
         </div>
-
         <div class="card">
           <div class="card-title">🚀 Learn by Language</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px">
-            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('Teach me JavaScript from scratch. Start with the absolute basics — what is it and what can I build with it?')">
-              <div style="font-size:24px;margin-bottom:6px">⚡</div>
-              <div style="font-size:13px;font-weight:700;margin-bottom:2px">JavaScript</div>
-              <div style="font-size:11px;color:var(--text2)">Most popular</div>
-            </div>
-            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('Teach me Python from scratch. Why is Python perfect for beginners?')">
-              <div style="font-size:24px;margin-bottom:6px">🐍</div>
-              <div style="font-size:13px;font-weight:700;margin-bottom:2px">Python</div>
-              <div style="font-size:11px;color:var(--text2)">Best for beginners</div>
-            </div>
-            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('Explain HTML and CSS to a complete beginner. What is the difference between them?')">
-              <div style="font-size:24px;margin-bottom:6px">🌐</div>
-              <div style="font-size:13px;font-weight:700;margin-bottom:2px">HTML & CSS</div>
-              <div style="font-size:11px;color:var(--text2)">Start here</div>
-            </div>
-            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('What are algorithms? Explain using everyday real-life examples for a complete beginner.')">
-              <div style="font-size:24px;margin-bottom:6px">🧩</div>
-              <div style="font-size:13px;font-weight:700;margin-bottom:2px">Algorithms</div>
-              <div style="font-size:11px;color:var(--text2)">Problem solving</div>
-            </div>
+            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('Teach me JavaScript from scratch. Start with the absolute basics.')"><div style="font-size:24px;margin-bottom:6px">⚡</div><div style="font-size:13px;font-weight:700;margin-bottom:2px">JavaScript</div><div style="font-size:11px;color:var(--text2)">Most popular</div></div>
+            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('Teach me Python from scratch. Why is Python perfect for beginners?')"><div style="font-size:24px;margin-bottom:6px">🐍</div><div style="font-size:13px;font-weight:700;margin-bottom:2px">Python</div><div style="font-size:11px;color:var(--text2)">Best for beginners</div></div>
+            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('Explain HTML and CSS to a complete beginner.')"><div style="font-size:24px;margin-bottom:6px">🌐</div><div style="font-size:13px;font-weight:700;margin-bottom:2px">HTML & CSS</div><div style="font-size:11px;color:var(--text2)">Start here</div></div>
+            <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'" onclick="quickLearn('What are algorithms? Explain using everyday real-life examples.')"><div style="font-size:24px;margin-bottom:6px">🧩</div><div style="font-size:13px;font-weight:700;margin-bottom:2px">Algorithms</div><div style="font-size:11px;color:var(--text2)">Problem solving</div></div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ AI MENTOR CHAT ═══ -->
+      <!-- CHAT -->
       <div class="page" id="page-chat">
-        <div class="section-hd">
-          <h2>AI Mentor <span style="color:var(--purple)">Chat</span></h2>
-          <p>Ask any coding question — explained simply, every time</p>
-        </div>
+        <div class="section-hd"><h2>AI Mentor <span style="color:var(--purple)">Chat</span></h2><p>Ask any coding question — explained simply, every time</p></div>
         <div class="chat-layout">
           <div class="mode-list" id="modeList">
             <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:5px">Pick a Mode</div>
-            <div class="mode-btn active" onclick="setMode('explain',this)">
-              <div class="mb-i">🧠</div>
-              <div class="mb-n">Explain It</div>
-              <div class="mb-d">Clear explanations with examples</div>
-            </div>
-            <div class="mode-btn" onclick="setMode('debug',this)">
-              <div class="mb-i">🐛</div>
-              <div class="mb-n">Fix My Code</div>
-              <div class="mb-d">Find and fix bugs step by step</div>
-            </div>
-            <div class="mode-btn" onclick="setMode('challenge',this)">
-              <div class="mb-i">🎯</div>
-              <div class="mb-n">Give Me a Task</div>
-              <div class="mb-d">Beginner practice challenge</div>
-            </div>
-            <div class="mode-btn" onclick="setMode('eli5',this)">
-              <div class="mb-i">👶</div>
-              <div class="mb-n">Super Simple</div>
-              <div class="mb-d">Explain like I'm 5 years old</div>
-            </div>
+            <div class="mode-btn active" onclick="setMode('explain',this)"><div class="mb-i">🧠</div><div class="mb-n">Explain It</div><div class="mb-d">Clear explanations with examples</div></div>
+            <div class="mode-btn" onclick="setMode('debug',this)"><div class="mb-i">🐛</div><div class="mb-n">Fix My Code</div><div class="mb-d">Find and fix bugs step by step</div></div>
+            <div class="mode-btn" onclick="setMode('challenge',this)"><div class="mb-i">🎯</div><div class="mb-n">Give Me a Task</div><div class="mb-d">Beginner practice challenge</div></div>
+            <div class="mode-btn" onclick="setMode('eli5',this)"><div class="mb-i">👶</div><div class="mb-n">Super Simple</div><div class="mb-d">Explain like I'm 5 years old</div></div>
           </div>
           <div class="chat-box">
-            <div class="chat-hd">
-              <div class="chat-hd-av">🤖</div>
-              <div>
-                <div class="chat-hd-name">NeuralCode AI</div>
-                <div class="chat-hd-sub" id="modeLabel">Explain Mode · Beginner Friendly</div>
-              </div>
-              <div class="online-dot"></div>
-            </div>
+            <div class="chat-hd"><div class="chat-hd-av">🤖</div><div><div class="chat-hd-name">NeuralCode AI</div><div class="chat-hd-sub" id="modeLabel">Explain Mode · Beginner Friendly</div></div><div class="online-dot"></div></div>
             <div class="msgs" id="msgs">
-              <div class="msg">
-                <div class="msg-av ai-av">AI</div>
-                <div>
-                  <div class="msg-lbl">🧠 Explain Mode</div>
-                  <div class="msg-bubble">Hey! 👋 I'm your AI coding mentor. No question is too basic here — I'll always explain things in simple, clear language with examples you can relate to.<br><br>What would you like to learn today?</div>
-                </div>
-              </div>
+              <div class="msg"><div class="msg-av ai-av">AI</div><div><div class="msg-lbl">🧠 Explain Mode</div><div class="msg-bubble">Hey! 👋 I'm your AI coding mentor. No question is too basic here — I'll always explain things in simple, clear language with examples you can relate to.<br><br>What would you like to learn today?</div></div></div>
             </div>
-            <div class="typing-wrap" id="typingWrap">
-              <div class="typing"><span></span><span></span><span></span></div>
-            </div>
-            <div class="chips-wrap" id="chipsWrap">
-              <div class="chips-lbl">Try asking →</div>
-              <div class="chips" id="chipsContainer">
-                <span class="chip" onclick="useChip(this)">What is a variable?</span>
-                <span class="chip" onclick="useChip(this)">Explain if/else</span>
-                <span class="chip" onclick="useChip(this)">What is a loop?</span>
-                <span class="chip" onclick="useChip(this)">What is a function?</span>
-              </div>
-            </div>
-            <div class="chat-inp">
-              <textarea id="chatTa" placeholder="Type your question... (Enter to send, Shift+Enter for new line)"></textarea>
-              <button class="send-btn" id="sendBtn" onclick="sendMsg()">
-                <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
+            <div class="typing-wrap" id="typingWrap"><div class="typing"><span></span><span></span><span></span></div></div>
+            <div class="chips-wrap" id="chipsWrap"><div class="chips-lbl">Try asking →</div><div class="chips" id="chipsContainer"><span class="chip" onclick="useChip(this)">What is a variable?</span><span class="chip" onclick="useChip(this)">Explain if/else</span><span class="chip" onclick="useChip(this)">What is a loop?</span><span class="chip" onclick="useChip(this)">What is a function?</span></div></div>
+            <div class="chat-inp"><textarea id="chatTa" placeholder="Type your question... (Enter to send, Shift+Enter for new line)"></textarea><button class="send-btn" id="sendBtn" onclick="sendMsg()"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ QUIZ ═══ -->
+      <!-- QUIZ -->
       <div class="page" id="page-quiz">
-        <div class="section-hd">
-          <h2>AI-Generated <span style="color:var(--purple)">Quiz</span></h2>
-          <p>Fresh questions generated by Claude AI — never the same quiz twice</p>
-        </div>
+        <div class="section-hd"><h2>AI-Generated <span style="color:var(--purple)">Quiz</span></h2><p>Fresh questions generated by AI — never the same quiz twice</p></div>
         <div id="vTopics">
-          <div class="tip-box">
-            <span class="ti">💡</span>
-            <span><strong>New here?</strong> Start with "Beginner Basics" — it covers the very first concepts every coder needs. No trick questions!</span>
-          </div>
+          <div class="tip-box"><span class="ti">💡</span><span><strong>New here?</strong> Start with "Beginner Basics" — it covers the very first concepts every coder needs. No trick questions!</span></div>
           <div class="topic-grid">
-            <div class="topic-card" onclick="pickTopic('Beginner Coding Basics including variables, data types, and simple if-else logic for absolute beginners')">
-              <span class="tc-diff d-beg">Beginner</span>
-              <span class="tc-em">🌱</span>
-              <div class="tc-nm">Beginner Basics</div>
-              <div class="tc-sb">Variables, types, conditions — start here</div>
-            </div>
-            <div class="topic-card" onclick="pickTopic('JavaScript fundamentals for beginners including functions, arrays, and loops')">
-              <span class="tc-diff d-easy">Easy</span>
-              <span class="tc-em">⚡</span>
-              <div class="tc-nm">JavaScript</div>
-              <div class="tc-sb">Functions, arrays, events, DOM basics</div>
-            </div>
-            <div class="topic-card" onclick="pickTopic('Python basics for beginners including syntax, lists, and simple functions')">
-              <span class="tc-diff d-easy">Easy</span>
-              <span class="tc-em">🐍</span>
-              <div class="tc-nm">Python Basics</div>
-              <div class="tc-sb">Syntax, lists, functions, loops</div>
-            </div>
-            <div class="topic-card" onclick="pickTopic('HTML and CSS basics for complete beginners including tags, selectors and box model')">
-              <span class="tc-diff d-beg">Beginner</span>
-              <span class="tc-em">🌐</span>
-              <div class="tc-nm">HTML & CSS</div>
-              <div class="tc-sb">Tags, selectors, layouts</div>
-            </div>
-            <div class="topic-card" onclick="pickTopic('Introduction to algorithms for beginners including simple sorting and searching')">
-              <span class="tc-diff d-easy">Easy</span>
-              <span class="tc-em">🧩</span>
-              <div class="tc-nm">Algorithms 101</div>
-              <div class="tc-sb">Logic, sorting, searching basics</div>
-            </div>
-            <div class="topic-card" onclick="pickTopic('Object-Oriented Programming OOP basics for beginners including classes and objects')">
-              <span class="tc-diff d-med">Medium</span>
-              <span class="tc-em">📦</span>
-              <div class="tc-nm">OOP Concepts</div>
-              <div class="tc-sb">Classes, objects, methods</div>
-            </div>
+            <div class="topic-card" onclick="pickTopic('Beginner Coding Basics including variables, data types, and simple if-else logic for absolute beginners')"><span class="tc-diff d-beg">Beginner</span><span class="tc-em">🌱</span><div class="tc-nm">Beginner Basics</div><div class="tc-sb">Variables, types, conditions — start here</div></div>
+            <div class="topic-card" onclick="pickTopic('JavaScript fundamentals for beginners including functions, arrays, and loops')"><span class="tc-diff d-easy">Easy</span><span class="tc-em">⚡</span><div class="tc-nm">JavaScript</div><div class="tc-sb">Functions, arrays, events, DOM basics</div></div>
+            <div class="topic-card" onclick="pickTopic('Python basics for beginners including syntax, lists, and simple functions')"><span class="tc-diff d-easy">Easy</span><span class="tc-em">🐍</span><div class="tc-nm">Python Basics</div><div class="tc-sb">Syntax, lists, functions, loops</div></div>
+            <div class="topic-card" onclick="pickTopic('HTML and CSS basics for complete beginners including tags, selectors and box model')"><span class="tc-diff d-beg">Beginner</span><span class="tc-em">🌐</span><div class="tc-nm">HTML & CSS</div><div class="tc-sb">Tags, selectors, layouts</div></div>
+            <div class="topic-card" onclick="pickTopic('Introduction to algorithms for beginners including simple sorting and searching')"><span class="tc-diff d-easy">Easy</span><span class="tc-em">🧩</span><div class="tc-nm">Algorithms 101</div><div class="tc-sb">Logic, sorting, searching basics</div></div>
+            <div class="topic-card" onclick="pickTopic('Object-Oriented Programming OOP basics for beginners including classes and objects')"><span class="tc-diff d-med">Medium</span><span class="tc-em">📦</span><div class="tc-nm">OOP Concepts</div><div class="tc-sb">Classes, objects, methods</div></div>
           </div>
         </div>
-        <div id="vLoading" style="display:none;text-align:center;padding:60px 20px">
-          <div style="display:inline-flex;gap:7px;margin-bottom:16px">
-            <div style="width:10px;height:10px;border-radius:50%;background:var(--purple);animation:ty 1.2s infinite"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:var(--teal);animation:ty 1.2s .2s infinite"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);animation:ty 1.2s .4s infinite"></div>
-          </div>
-          <div style="font-size:16px;font-weight:700;margin-bottom:5px">Building your quiz...</div>
-          <div style="font-size:13px;color:var(--text2)">Claude is crafting 5 questions on <strong id="loadTopic" style="color:var(--purple)"></strong></div>
-        </div>
-        <div id="vQuestion" style="display:none">
-          <div class="quiz-card">
-            <div class="q-ptrack"><div class="q-pbar" id="qBar"></div></div>
-            <div class="q-meta">
-              <span class="q-step" id="qStep">Question 1 of 5</span>
-              <span class="q-clock" id="qClock">⏱ 00:00</span>
-            </div>
-            <div class="q-text" id="qText">Loading...</div>
-            <div class="q-opts" id="qOpts"></div>
-            <div class="q-explain" id="qExp" style="display:none"></div>
-            <div class="q-actions">
-              <button class="btn btn-primary" id="qNext" onclick="nextQ()" style="display:none">Next →</button>
-            </div>
-          </div>
-        </div>
-        <div id="vResult" style="display:none">
-          <div class="result-card">
-            <div class="r-emoji" id="rEm">🎉</div>
-            <div class="r-title" id="rTitle">Quiz Complete!</div>
-            <div class="r-sub" id="rSub">Here's your score</div>
-            <div class="r-metrics">
-              <div class="r-cell"><div class="r-val" style="color:var(--purple)" id="rScore">0/5</div><div class="r-lbl">Score</div></div>
-              <div class="r-cell"><div class="r-val" style="color:var(--gold)" id="rXP">+0</div><div class="r-lbl">XP Earned</div></div>
-              <div class="r-cell"><div class="r-val" style="color:var(--teal)" id="rTime">0:00</div><div class="r-lbl">Time</div></div>
-            </div>
-            <div style="display:flex;gap:10px;justify-content:center">
-              <button class="btn btn-primary" onclick="retryQ()">Try Again</button>
-              <button class="btn" onclick="resetQuiz()">New Topic</button>
-            </div>
-          </div>
-        </div>
+        <div id="vLoading" style="display:none;text-align:center;padding:60px 20px"><div style="display:inline-flex;gap:7px;margin-bottom:16px"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);animation:ty 1.2s infinite"></div><div style="width:10px;height:10px;border-radius:50%;background:var(--teal);animation:ty 1.2s .2s infinite"></div><div style="width:10px;height:10px;border-radius:50%;background:var(--gold);animation:ty 1.2s .4s infinite"></div></div><div style="font-size:16px;font-weight:700;margin-bottom:5px">Building your quiz...</div><div style="font-size:13px;color:var(--text2)">AI is crafting 5 questions on <strong id="loadTopic" style="color:var(--purple)"></strong></div></div>
+        <div id="vQuestion" style="display:none"><div class="quiz-card"><div class="q-ptrack"><div class="q-pbar" id="qBar"></div></div><div class="q-meta"><span class="q-step" id="qStep">Question 1 of 5</span><span class="q-clock" id="qClock">⏱ 00:00</span></div><div class="q-text" id="qText">Loading...</div><div class="q-opts" id="qOpts"></div><div class="q-explain" id="qExp" style="display:none"></div><div class="q-actions"><button class="btn btn-primary" id="qNext" onclick="nextQ()" style="display:none">Next →</button></div></div></div>
+        <div id="vResult" style="display:none"><div class="result-card"><div class="r-emoji" id="rEm">🎉</div><div class="r-title" id="rTitle">Quiz Complete!</div><div class="r-sub" id="rSub">Here's your score</div><div class="r-metrics"><div class="r-cell"><div class="r-val" style="color:var(--purple)" id="rScore">0/5</div><div class="r-lbl">Score</div></div><div class="r-cell"><div class="r-val" style="color:var(--gold)" id="rXP">+0</div><div class="r-lbl">XP Earned</div></div><div class="r-cell"><div class="r-val" style="color:var(--teal)" id="rTime">0:00</div><div class="r-lbl">Time</div></div></div><div style="display:flex;gap:10px;justify-content:center"><button class="btn btn-primary" onclick="retryQ()">Try Again</button><button class="btn" onclick="resetQuiz()">New Topic</button></div></div></div>
       </div>
 
-      <!-- ═══ CODE REVIEW ═══ -->
+      <!-- CODE REVIEW -->
       <div class="page" id="page-review">
-        <div class="section-hd">
-          <h2>AI Code <span style="color:var(--purple)">Review</span></h2>
-          <p>Paste your code — get instant feedback on bugs, quality and improvements</p>
-        </div>
-        <div class="tip-box">
-          <span class="ti">💡</span>
-          <span>Think of this as a senior developer looking over your shoulder! Claude will explain every issue in plain English so you actually learn from it.</span>
-        </div>
+        <div class="section-hd"><h2>AI Code <span style="color:var(--purple)">Review</span></h2><p>Paste your code — get instant feedback on bugs, quality and improvements</p></div>
+        <div class="tip-box"><span class="ti">💡</span><span>Think of this as a senior developer looking over your shoulder! AI will explain every issue in plain English so you actually learn from it.</span></div>
         <div class="rev-box">
-          <div class="rev-tabs">
-            <div class="rev-tab active" onclick="setRevTab('code',this)">📝 Code</div>
-            <div class="rev-tab" onclick="setRevTab('desc',this)">💬 + Description</div>
-          </div>
+          <div class="rev-tabs"><div class="rev-tab active" onclick="setRevTab('code',this)">📝 Code</div><div class="rev-tab" onclick="setRevTab('desc',this)">💬 + Description</div></div>
           <div class="rev-body">
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
-              <select class="lang-sel" id="revLang">
-                <option>JavaScript</option><option>Python</option><option>HTML</option>
-                <option>CSS</option><option>Java</option><option>C++</option><option>TypeScript</option><option>SQL</option>
-              </select>
-              <label class="chk-lbl"><input type="checkbox" id="chkBeg" checked> Beginner-friendly explanations</label>
-              <label class="chk-lbl"><input type="checkbox" id="chkRw"> Show improved version</label>
-            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px"><select class="lang-sel" id="revLang"><option>JavaScript</option><option>Python</option><option>HTML</option><option>CSS</option><option>Java</option><option>C++</option><option>TypeScript</option><option>SQL</option></select><label class="chk-lbl"><input type="checkbox" id="chkBeg" checked> Beginner-friendly explanations</label><label class="chk-lbl"><input type="checkbox" id="chkRw"> Show improved version</label></div>
             <textarea class="code-ta" id="codeArea" placeholder="// Paste your code here..."></textarea>
-            <div id="descBlock" style="display:none;margin-top:10px">
-              <textarea class="code-ta" id="descTa" placeholder="What is this code supposed to do? (optional but helps)" style="min-height:70px"></textarea>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-              <button class="analyze-btn" id="revBtn" onclick="doReview()">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                Review My Code
-              </button>
-              <button class="btn btn-sm" onclick="loadSample()">Load sample</button>
-            </div>
+            <div id="descBlock" style="display:none;margin-top:10px"><textarea class="code-ta" id="descTa" placeholder="What is this code supposed to do? (optional)" style="min-height:70px"></textarea></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><button class="analyze-btn" id="revBtn" onclick="doReview()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Review My Code</button><button class="btn btn-sm" onclick="loadSample()">Load sample</button></div>
           </div>
         </div>
         <div id="revResult" style="display:none"></div>
       </div>
 
-      <!-- ═══ ROADMAP ═══ -->
+      <!-- ROADMAP -->
       <div class="page" id="page-roadmap">
-        <div class="section-hd">
-          <h2>Learning <span style="color:var(--purple)">Roadmap</span></h2>
-          <p>Your personalised step-by-step path from zero to confident coder</p>
-        </div>
+        <div class="section-hd"><h2>Learning <span style="color:var(--purple)">Roadmap</span></h2><p>Your personalised step-by-step path from zero to confident coder</p></div>
         <div class="g2" style="align-items:start">
-          <div class="card">
-            <div class="card-title">🗺️ JavaScript Path <span style="font-family:var(--mono);color:var(--purple);margin-left:auto" id="rmPct">0% done</span></div>
-            <div class="pbar" style="margin-bottom:20px"><div class="pbar-fill" id="rmBar" style="width:0%"></div></div>
-            <div class="rm-steps" id="rmContainer"></div>
-          </div>
+          <div class="card"><div class="card-title">🗺️ JavaScript Path <span style="font-family:var(--mono);color:var(--purple);margin-left:auto" id="rmPct">0% done</span></div><div class="pbar" style="margin-bottom:20px"><div class="pbar-fill" id="rmBar" style="width:0%"></div></div><div class="rm-steps" id="rmContainer"></div></div>
           <div style="display:flex;flex-direction:column;gap:14px">
-            <div class="card">
-              <div class="card-title">🤖 AI Recommendations</div>
-              <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
-                <div style="padding:11px;background:var(--purple-l);border:1.5px solid var(--border2);border-radius:var(--r)">
-                  📌 Focus on <strong style="color:var(--purple)">functions</strong> — they are used in almost every program you will ever write.
-                </div>
-                <div style="padding:11px;background:var(--teal-l);border:1.5px solid #00c9a730;border-radius:var(--r)">
-                  ✅ Your HTML/CSS basics look solid. Try building a simple webpage to apply them!
-                </div>
-                <div style="padding:11px;background:var(--gold-l);border:1.5px solid #f5a62330;border-radius:var(--r)">
-                  ⚡ Just 20 minutes of practice a day beats a 3-hour cram session. Stay consistent!
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-title">🏆 Achievements</div>
-              <div style="display:flex;flex-direction:column;gap:8px" id="achievements"></div>
-            </div>
+            <div class="card"><div class="card-title">🤖 AI Recommendations</div><div style="display:flex;flex-direction:column;gap:9px;font-size:13px"><div style="padding:11px;background:var(--purple-l);border:1.5px solid var(--border2);border-radius:var(--r)">📌 Focus on <strong style="color:var(--purple)">functions</strong> — they are used in almost every program you will ever write.</div><div style="padding:11px;background:var(--teal-l);border:1.5px solid #00c9a730;border-radius:var(--r)">✅ Your HTML/CSS basics look solid. Try building a simple webpage to apply them!</div><div style="padding:11px;background:var(--gold-l);border:1.5px solid #f5a62330;border-radius:var(--r)">⚡ Just 20 minutes of practice a day beats a 3-hour cram session. Stay consistent!</div></div></div>
+            <div class="card"><div class="card-title">🏆 Achievements</div><div style="display:flex;flex-direction:column;gap:8px" id="achievements"></div></div>
           </div>
+        </div>
+      </div>
+
+      <!-- HISTORY PAGE -->
+      <div class="page" id="page-history">
+        <div class="section-hd">
+          <h2>📚 Your <span style="color:var(--purple)">History</span></h2>
+          <p>All your previous chats and quiz results saved automatically</p>
+        </div>
+
+        <!-- Tab buttons -->
+        <div style="display:flex;gap:10px;margin-bottom:4px">
+          <button class="h-tab-btn active" id="hTabChat" onclick="switchHistoryTab('chat')">💬 Chat History</button>
+          <button class="h-tab-btn" id="hTabQuiz" onclick="switchHistoryTab('quiz')">🎯 Quiz Results</button>
+        </div>
+
+        <!-- Chat history panel -->
+        <div id="hChatPanel">
+          <div id="hChatList" style="display:flex;flex-direction:column;gap:10px">
+            <div class="h-empty"><div class="h-empty-icon">⏳</div><div>Loading your chat history...</div></div>
+          </div>
+        </div>
+
+        <!-- Quiz history panel -->
+        <div id="hQuizPanel" style="display:none">
+          <div id="hQuizList" style="display:flex;flex-direction:column;gap:10px">
+            <div class="h-empty"><div class="h-empty-icon">⏳</div><div>Loading your quiz history...</div></div>
+          </div>
+        </div>
+
+        <!-- Chat detail view -->
+        <div id="hChatDetail" style="display:none">
+          <button onclick="closeHistoryDetail()" style="margin-bottom:16px;padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--text);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer">← Back to History</button>
+          <div id="hChatDetailContent"></div>
         </div>
       </div>
 
@@ -904,34 +528,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <div class="toast" id="toast"><span id="toastMsg">Done!</span></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-// PASTE THIS <script> BLOCK into your neuralcode.html
-// replacing everything between <script>
 const SERVER = '';
 
 let currentUser = null;
-let JWT_TOKEN   = localStorage.getItem('nc_token') || null;
+let JWT_TOKEN = localStorage.getItem('nc_token') || null;
 
-// Groq direct fallback (used in demo mode or when server is offline)
+// Groq fallback for demo mode
 const GROQ_KEY = 'YOUR_GROQ_KEY_HERE';
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 async function callGeminiFallback(systemPrompt, userPrompt) {
   const r = await fetch(GROQ_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + GROQ_KEY
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages: [
-        {role: 'system', content: systemPrompt},
-        {role: 'user',   content: userPrompt}
-      ],
-      max_tokens: 1000,
-      temperature: 0.7
-    })
+    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY},
+    body: JSON.stringify({model: 'llama-3.3-70b-versatile', messages: [{role:'system',content:systemPrompt},{role:'user',content:userPrompt}], max_tokens: 1000, temperature: 0.7})
   });
   const d = await r.json();
   if (d.error) throw new Error(d.error.message);
@@ -941,579 +551,278 @@ async function callGeminiFallback(systemPrompt, userPrompt) {
 }
 
 async function api(method, path, body) {
-  // Demo mode or no token — use Gemini directly
-  // Auth routes always go to backend (no JWT needed for login/register)
   const isAuthRoute = path.startsWith('/auth/') || path.startsWith('/user/');
-
-  // Demo mode (no JWT) — use Groq directly for AI features only
   if (!JWT_TOKEN && !isAuthRoute) {
-    if (path === '/api/chat') {
-      const reply = await callGeminiFallback(body.systemPrompt, body.userMessage);
-      return {reply: reply};
-    }
-    if (path === '/api/quiz') {
-      const p = 'Create exactly 5 beginner-level multiple choice quiz questions about: "' + body.topic + '". Return ONLY a valid JSON array, no markdown: [{"q":"question","options":["A) opt","B) opt","C) opt","D) opt"],"correct":0,"explain":"simple explanation"}]';
-      const raw = (await callGeminiFallback('You are a quiz generator. Return ONLY raw JSON arrays with no markdown fences.', p)).replace(/```json|```/g,'').trim();
-      return {questions: JSON.parse(raw)};
-    }
-    if (path === '/api/review') {
-      const p = 'Review this ' + (body.lang||'JavaScript') + ' code written by a beginner. Respond ONLY with valid JSON (no markdown): {"overall":75,"grade":"B","metrics":{"readability":80,"correctness":70,"bestPractices":65},"issues":[{"type":"good","text":"feedback"},{"type":"warn","text":"improvement"},{"type":"bad","text":"bug"}],"summary":"2 sentence encouraging summary"' + (body.rewrite ? ',"rewrite":"improved code"' : '') + '}\nCode:\n' + body.code;
-      const raw = (await callGeminiFallback('You are a code reviewer. Return ONLY raw JSON with no markdown fences.', p)).replace(/```json|```/g,'').trim();
-      return {review: JSON.parse(raw)};
-    }
+    if (path === '/api/chat') { const reply = await callGeminiFallback(body.systemPrompt, body.userMessage); return {reply}; }
+    if (path === '/api/quiz') { const p = 'Create exactly 5 MCQ quiz questions about: "'+body.topic+'". Return ONLY JSON array: [{"q":"q","options":["A) o","B) o","C) o","D) o"],"correct":0,"explain":"e"}]'; const raw = (await callGeminiFallback('Quiz generator. Return ONLY raw JSON.', p)).replace(/```json|```/g,'').trim(); return {questions: JSON.parse(raw)}; }
+    if (path === '/api/review') { const p = 'Review this '+( body.lang||'JavaScript')+' beginner code. Return ONLY JSON: {"overall":75,"grade":"B","metrics":{"readability":80,"correctness":70,"bestPractices":65},"issues":[{"type":"good","text":"t"},{"type":"warn","text":"t"},{"type":"bad","text":"t"}],"summary":"s"'+(body.rewrite?',"rewrite":"code"':'')+'}\\nCode:\\n'+body.code; const raw = (await callGeminiFallback('Code reviewer. Return ONLY raw JSON.', p)).replace(/```json|```/g,'').trim(); return {review: JSON.parse(raw)}; }
+    if (path.startsWith('/api/history')) return null; // skip history in demo mode
   }
-
-  // All other requests go to backend (auth routes + logged-in AI calls)
-  const headers = { 'Content-Type': 'application/json' };
+  const headers = {'Content-Type': 'application/json'};
   if (JWT_TOKEN) headers['Authorization'] = 'Bearer ' + JWT_TOKEN;
-  const r = await fetch(SERVER + path, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined
-  });
+  const r = await fetch(SERVER + path, {method, headers, body: body ? JSON.stringify(body) : undefined});
   const d = await r.json();
   if (!r.ok) throw new Error(d.error || 'Server error');
   return d;
 }
 
-function switchTab(tab){
-  document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='login'?0:1)));
-  document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
-  document.getElementById('registerForm').style.display=tab==='register'?'block':'none';
-}
-
-function togglePw(id,btn){
-  const inp=document.getElementById(id);
-  const show=inp.type==='password';
-  inp.type=show?'text':'password';
-  btn.textContent=show?'🙈':'👁';
-}
-
-function checkStrength(pw){
-  const fill=document.getElementById('strengthFill');
-  const lbl=document.getElementById('strengthLabel');
-  if(!pw){fill.style.width='0';lbl.textContent='';return;}
-  let score=0;
-  if(pw.length>=8)score++;if(pw.length>=12)score++;
-  if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;
-  if(/[^A-Za-z0-9]/.test(pw))score++;
-  const levels=[{w:'20%',c:'var(--red)',t:'Too weak'},{w:'40%',c:'var(--orange)',t:'Weak'},{w:'60%',c:'var(--gold)',t:'Fair'},{w:'80%',c:'var(--teal)',t:'Good'},{w:'100%',c:'var(--green)',t:'Strong ✓'}];
-  const l=levels[Math.min(score,4)];
-  fill.style.width=l.w;fill.style.background=l.c;lbl.textContent=l.t;lbl.style.color=l.c;
-}
-
+// ── AUTH ──────────────────────────────────────────
+function switchTab(tab){document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='login'?0:1)));document.getElementById('loginForm').style.display=tab==='login'?'block':'none';document.getElementById('registerForm').style.display=tab==='register'?'block':'none';}
+function togglePw(id,btn){const inp=document.getElementById(id);const show=inp.type==='password';inp.type=show?'text':'password';btn.textContent=show?'🙈':'👁';}
+function checkStrength(pw){const fill=document.getElementById('strengthFill');const lbl=document.getElementById('strengthLabel');if(!pw){fill.style.width='0';lbl.textContent='';return;}let score=0;if(pw.length>=8)score++;if(pw.length>=12)score++;if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^A-Za-z0-9]/.test(pw))score++;const levels=[{w:'20%',c:'var(--red)',t:'Too weak'},{w:'40%',c:'var(--orange)',t:'Weak'},{w:'60%',c:'var(--gold)',t:'Fair'},{w:'80%',c:'var(--teal)',t:'Good'},{w:'100%',c:'var(--green)',t:'Strong ✓'}];const l=levels[Math.min(score,4)];fill.style.width=l.w;fill.style.background=l.c;lbl.textContent=l.t;lbl.style.color=l.c;}
 function showErr(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',4000);}
 function showOk(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',4000);}
 
 async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim();
-  const pw=document.getElementById('loginPw').value;
+  const email=document.getElementById('loginEmail').value.trim();const pw=document.getElementById('loginPw').value;
   if(!email||!pw){showErr('loginErr','Please fill in all fields.');return;}
-  const btn=document.getElementById('loginBtn');
-  btn.disabled=true;btn.textContent='Signing in...';
-  try{
-    const d=await api('POST','/auth/login',{email,password:pw});
-    JWT_TOKEN=d.token;
-    localStorage.setItem('nc_token',d.token);
-    loginSuccess(d.user);
-  }catch(e){
-    showErr('loginErr',e.message);
-  }finally{
-    btn.disabled=false;btn.textContent='Sign In →';
-  }
+  const btn=document.getElementById('loginBtn');btn.disabled=true;btn.textContent='Signing in...';
+  try{const d=await api('POST','/auth/login',{email,password:pw});JWT_TOKEN=d.token;localStorage.setItem('nc_token',d.token);loginSuccess(d.user);}
+  catch(e){showErr('loginErr',e.message);}
+  finally{btn.disabled=false;btn.textContent='Sign In →';}
 }
 
 async function doRegister(){
-  const name=document.getElementById('regName').value.trim();
-  const email=document.getElementById('regEmail').value.trim();
-  const pw=document.getElementById('regPw').value;
-  const pw2=document.getElementById('regPw2').value;
-  const role=document.getElementById('regRole').value;
+  const name=document.getElementById('regName').value.trim();const email=document.getElementById('regEmail').value.trim();const pw=document.getElementById('regPw').value;const pw2=document.getElementById('regPw2').value;const role=document.getElementById('regRole').value;
   if(!name||!email||!pw){showErr('regErr','Please fill in all fields.');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('regErr','Invalid email format.');return;}
   if(pw.length<6){showErr('regErr','Password must be at least 6 characters.');return;}
   if(pw!==pw2){showErr('regErr','Passwords do not match.');return;}
-  const btn=document.getElementById('regBtn');
-  btn.disabled=true;btn.textContent='Creating account...';
-  try{
-    const d=await api('POST','/auth/register',{name,email,password:pw,role});
-    JWT_TOKEN=d.token;
-    localStorage.setItem('nc_token',d.token);
-    showOk('regSuccess','Account created! Signing you in...');
-    setTimeout(()=>loginSuccess(d.user),1000);
-  }catch(e){
-    showErr('regErr',e.message);
-  }finally{
-    btn.disabled=false;btn.textContent='Create Account →';
-  }
+  const btn=document.getElementById('regBtn');btn.disabled=true;btn.textContent='Creating account...';
+  try{const d=await api('POST','/auth/register',{name,email,password:pw,role});JWT_TOKEN=d.token;localStorage.setItem('nc_token',d.token);showOk('regSuccess','Account created! Signing you in...');setTimeout(()=>loginSuccess(d.user),1000);}
+  catch(e){showErr('regErr',e.message);}
+  finally{btn.disabled=false;btn.textContent='Create Account →';}
 }
 
-function demoLogin(){
-  try{
-    JWT_TOKEN=null;
-    localStorage.removeItem('nc_token');
-    currentUser={name:'Demo User',email:'demo@neuralcode.ai',xp:0,streak:1,stats:[0,0,0,0],progress:[0,0,0,0]};
-    document.getElementById('authScreen').style.display='none';
-    document.getElementById('appShell').classList.add('visible');
-    initApp();
-  }catch(e){
-    alert('Error starting demo: '+e.message);
-  }
-}
-
-function forgotPassword(){
-  alert('Please register a new account or contact support to reset your password.');
-}
-
-function loginSuccess(user){
-  currentUser=user;
-  document.getElementById('authScreen').style.display='none';
-  document.getElementById('appShell').classList.add('visible');
-  initApp();
-}
-
-function doLogout(){
-  localStorage.removeItem('nc_token');
-  JWT_TOKEN=null;
-  currentUser=null;
-  document.getElementById('appShell').classList.remove('visible');
-  document.getElementById('authScreen').style.display='flex';
-  document.getElementById('userMenu').classList.remove('open');
-}
+function demoLogin(){try{JWT_TOKEN=null;localStorage.removeItem('nc_token');currentUser={name:'Demo User',email:'demo@neuralcode.ai',xp:0,streak:1,stats:[0,0,0,0],progress:[0,0,0,0]};document.getElementById('authScreen').style.display='none';document.getElementById('appShell').classList.add('visible');initApp();}catch(e){alert('Error starting demo: '+e.message);}}
+function forgotPassword(){alert('Please register a new account or contact support to reset your password.');}
+function loginSuccess(user){currentUser=user;document.getElementById('authScreen').style.display='none';document.getElementById('appShell').classList.add('visible');initApp();}
+function doLogout(){localStorage.removeItem('nc_token');JWT_TOKEN=null;currentUser=null;currentChatId=null;document.getElementById('appShell').classList.remove('visible');document.getElementById('authScreen').style.display='flex';document.getElementById('userMenu').classList.remove('open');}
 
 window.addEventListener('load',async()=>{
-  // Always show auth screen first
-  document.getElementById('authScreen').style.display='flex';
-  document.getElementById('appShell').classList.remove('visible');
-
-  if(JWT_TOKEN){
-    try{
-      const d=await api('GET','/auth/me');
-      currentUser=d;
-      document.getElementById('authScreen').style.display='none';
-      document.getElementById('appShell').classList.add('visible');
-      initApp();
-    }catch(e){
-      // Server down or token expired — just show login
-      localStorage.removeItem('nc_token');
-      JWT_TOKEN=null;
-      document.getElementById('authScreen').style.display='flex';
-    }
-  }
+  document.getElementById('authScreen').style.display='flex';document.getElementById('appShell').classList.remove('visible');
+  if(JWT_TOKEN){try{const d=await api('GET','/auth/me');currentUser=d;document.getElementById('authScreen').style.display='none';document.getElementById('appShell').classList.add('visible');initApp();}catch(e){localStorage.removeItem('nc_token');JWT_TOKEN=null;}}
 });
 
+// ── APP ───────────────────────────────────────────
 function initApp(){
   const ud=currentUser;
   const initial=(ud.name||'A').charAt(0).toUpperCase();
-  document.getElementById('avatarLetter').textContent=initial;
-  document.getElementById('sidebarAv').textContent=initial;
-  document.getElementById('sidebarName').textContent=(ud.name||'User').split(' ')[0];
-  document.getElementById('menuName').textContent=ud.name||'User';
+  document.getElementById('avatarLetter').textContent=initial;document.getElementById('sidebarAv').textContent=initial;
+  document.getElementById('sidebarName').textContent=(ud.name||'User').split(' ')[0];document.getElementById('menuName').textContent=ud.name||'User';
   document.getElementById('heroGreeting').textContent='Welcome back, '+(ud.name||'').split(' ')[0]+'! 👋';
-  document.getElementById('xpVal').textContent=(ud.xp||0).toLocaleString();
-  document.getElementById('st4').textContent=(ud.xp||0).toLocaleString();
-  document.getElementById('st1').textContent=(ud.stats||[])[0]||0;
-  document.getElementById('st2').textContent=(ud.stats||[])[1]||0;
-  document.getElementById('st3').textContent=(ud.stats||[])[2]||0;
+  document.getElementById('xpVal').textContent=(ud.xp||0).toLocaleString();document.getElementById('st4').textContent=(ud.xp||0).toLocaleString();
+  document.getElementById('st1').textContent=(ud.stats||[])[0]||0;document.getElementById('st2').textContent=(ud.stats||[])[1]||0;document.getElementById('st3').textContent=(ud.stats||[])[2]||0;
   document.getElementById('streakVal').textContent=ud.streak||1;
-  const lvl=getLevel(ud.xp||0);
-  document.getElementById('levelPill').textContent=lvl;
-  document.getElementById('sidebarRole').textContent=lvl;
-  updateProgress(ud.progress||[0,0,0,0]);
-  renderRoadmap();
-  renderAchievements();
+  const lvl=getLevel(ud.xp||0);document.getElementById('levelPill').textContent=lvl;document.getElementById('sidebarRole').textContent=lvl;
+  updateProgress(ud.progress||[0,0,0,0]);renderRoadmap();renderAchievements();
 }
 
-function getLevel(xp){
-  if(xp<100)return 'Beginner';if(xp<300)return 'Novice';
-  if(xp<600)return 'Learner';if(xp<1000)return 'Coder';
-  if(xp<1500)return 'Developer';return 'Pro Coder';
-}
+function getLevel(xp){if(xp<100)return 'Beginner';if(xp<300)return 'Novice';if(xp<600)return 'Learner';if(xp<1000)return 'Coder';if(xp<1500)return 'Developer';return 'Pro Coder';}
+function updateProgress(prog){[['p1','p1v'],['p2','p2v'],['p3','p3v'],['p4','p4v']].forEach(([b,l],i)=>{const v=prog[i]||0;document.getElementById(b).style.width=v+'%';document.getElementById(l).textContent=v+'%';});}
+async function saveProgress(){if(!JWT_TOKEN)return;try{await api('PATCH','/user/progress',{xp:currentUser.xp,stats:currentUser.stats,progress:currentUser.progress,streak:currentUser.streak});}catch(e){console.warn('Progress save failed:',e.message);}}
+function addXP(n){currentUser.xp=(currentUser.xp||0)+n;document.getElementById('xpVal').textContent=currentUser.xp.toLocaleString();document.getElementById('st4').textContent=currentUser.xp.toLocaleString();document.getElementById('levelPill').textContent=getLevel(currentUser.xp);document.getElementById('sidebarRole').textContent=getLevel(currentUser.xp);saveProgress();}
+function incStat(idx){currentUser.stats=currentUser.stats||[0,0,0,0];currentUser.stats[idx]=(currentUser.stats[idx]||0)+1;const ids=['st1','st2','st3'];if(ids[idx])document.getElementById(ids[idx]).textContent=currentUser.stats[idx];saveProgress();}
+function bumpProgress(idx,amount){currentUser.progress=currentUser.progress||[0,0,0,0];currentUser.progress[idx]=Math.min(100,(currentUser.progress[idx]||0)+amount);updateProgress(currentUser.progress);saveProgress();}
 
-function updateProgress(prog){
-  [['p1','p1v'],['p2','p2v'],['p3','p3v'],['p4','p4v']].forEach(([b,l],i)=>{
-    const v=prog[i]||0;
-    document.getElementById(b).style.width=v+'%';
-    document.getElementById(l).textContent=v+'%';
-  });
-}
-
-async function saveProgress(){
-  if(!JWT_TOKEN)return;
-  try{
-    await api('PATCH','/user/progress',{
-      xp:currentUser.xp,
-      stats:currentUser.stats,
-      progress:currentUser.progress,
-      streak:currentUser.streak
-    });
-  }catch(e){console.warn('Progress save failed:',e.message);}
-}
-
-function addXP(n){
-  currentUser.xp=(currentUser.xp||0)+n;
-  document.getElementById('xpVal').textContent=currentUser.xp.toLocaleString();
-  document.getElementById('st4').textContent=currentUser.xp.toLocaleString();
-  document.getElementById('levelPill').textContent=getLevel(currentUser.xp);
-  document.getElementById('sidebarRole').textContent=getLevel(currentUser.xp);
-  saveProgress();
-}
-
-function incStat(idx){
-  currentUser.stats=currentUser.stats||[0,0,0,0];
-  currentUser.stats[idx]=(currentUser.stats[idx]||0)+1;
-  const ids=['st1','st2','st3'];
-  if(ids[idx])document.getElementById(ids[idx]).textContent=currentUser.stats[idx];
-  saveProgress();
-}
-
-function bumpProgress(idx,amount){
-  currentUser.progress=currentUser.progress||[0,0,0,0];
-  currentUser.progress[idx]=Math.min(100,(currentUser.progress[idx]||0)+amount);
-  updateProgress(currentUser.progress);
-  saveProgress();
-}
-
-function goToQuiz(){
-  var items=document.querySelectorAll('.s-item');
-  for(var i=0;i<items.length;i++){
-    if(items[i].textContent.trim().indexOf('Quiz')!==-1){
-      items[i].click();return;
-    }
-  }
-}
-function goToChat(){
-  var items=document.querySelectorAll('.s-item');
-  for(var i=0;i<items.length;i++){
-    if(items[i].textContent.trim().indexOf('Mentor')!==-1){
-      items[i].click();return;
-    }
-  }
-}
+// ── NAV ───────────────────────────────────────────
 function goPage(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.s-item').forEach(i=>i.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   el.classList.add('active');
   if(window.innerWidth<=768)toggleSidebar(true);
-  // When opening quiz page always show topic picker
-  if(id==='quiz'){
-    document.getElementById('vTopics').style.display='block';
-    document.getElementById('vLoading').style.display='none';
-    document.getElementById('vQuestion').style.display='none';
-    document.getElementById('vResult').style.display='none';
+  if(id==='quiz'){document.getElementById('vTopics').style.display='block';document.getElementById('vLoading').style.display='none';document.getElementById('vQuestion').style.display='none';document.getElementById('vResult').style.display='none';}
+  if(id==='history'){
+    currentChatId=null;
+    document.getElementById('hChatDetail').style.display='none';
+    document.getElementById('hChatPanel').style.display='block';
+    document.getElementById('hQuizPanel').style.display='none';
+    document.getElementById('hTabChat').className='h-tab-btn active';
+    document.getElementById('hTabQuiz').className='h-tab-btn';
+    loadChatHistory();
   }
 }
 
-function toggleSidebar(forceClose){
-  const sb=document.getElementById('sidebar');
-  const ov=document.getElementById('sidebarOverlay');
-  const isOpen=sb.classList.contains('open');
-  if(forceClose||isOpen){sb.classList.remove('open');ov.classList.remove('show');}
-  else{sb.classList.add('open');ov.classList.add('show');}
-}
-
+function toggleSidebar(forceClose){const sb=document.getElementById('sidebar');const ov=document.getElementById('sidebarOverlay');const isOpen=sb.classList.contains('open');if(forceClose||isOpen){sb.classList.remove('open');ov.classList.remove('show');}else{sb.classList.add('open');ov.classList.add('show');}}
 function toggleMenu(){document.getElementById('userMenu').classList.toggle('open');}
-document.addEventListener('click',e=>{
-  if(!e.target.closest('#avatarBtn')&&!e.target.closest('#userMenu'))
-    document.getElementById('userMenu').classList.remove('open');
-});
+document.addEventListener('click',e=>{if(!e.target.closest('#avatarBtn')&&!e.target.closest('#userMenu'))document.getElementById('userMenu').classList.remove('open');});
 
-function navTo(pageId){
-  var items = document.querySelectorAll('.s-item');
-  for(var i=0;i<items.length;i++){
-    var oc = items[i].getAttribute('onclick') || '';
-    if(oc.indexOf(pageId) !== -1){
-      goPage(pageId, items[i]);
-      return;
-    }
-  }
-}
+function navTo(pageId){var items=document.querySelectorAll('.s-item');for(var i=0;i<items.length;i++){var oc=items[i].getAttribute('onclick')||'';if(oc.indexOf(pageId)!==-1){goPage(pageId,items[i]);return;}}}
+function quickLearn(q){navTo('chat');setTimeout(function(){document.getElementById('chatTa').value=q;sendMsg();},300);}
 
-function quickLearn(q){
-  navTo('chat');
-  setTimeout(function(){document.getElementById('chatTa').value=q;sendMsg();},300);
-}
-
+// ── CHAT ──────────────────────────────────────────
 let chatMode='explain';
+let currentChatId=null;
+
 const modes={
-  explain:{label:'Explain Mode · Beginner Friendly',system:'You are a kind, patient coding instructor for absolute beginners. ALWAYS explain in plain English using real-life analogies. Define every technical term immediately. Show a short commented code example for every concept. End with one "Try it yourself" suggestion. Format code with triple backticks.',chips:['What is a variable?','Explain if/else','What is a function?','What is a loop?']},
+  explain:{label:'Explain Mode · Beginner Friendly',system:'You are a kind, patient coding instructor for absolute beginners. ALWAYS explain in plain English using real-life analogies. Define every technical term immediately. Show a short commented code example for every concept. End with one "Try it yourself" suggestion.',chips:['What is a variable?','Explain if/else','What is a function?','What is a loop?']},
   debug:{label:'Fix My Code Mode',system:'You are a friendly debugger for beginners. When given code: 1) Confirm what it should do. 2) List each bug with line number and plain-English explanation. 3) Show corrected code with comments. 4) Give one tip to avoid this bug.',chips:['Find bugs in my code','Why is my loop broken?','My function returns undefined','SyntaxError help']},
   challenge:{label:'Practice Challenge Mode',system:'You are a beginner coding challenge creator. Give ONE small achievable challenge: 1) Friendly intro, 2) Task in plain English with 2-3 bullet requirements, 3) Example input/output, 4) A beginner hint.',chips:['Give me a JavaScript challenge','Give me a Python task','Array practice challenge','Function writing task']},
   eli5:{label:'Super Simple · ELI5 Mode',system:'Explain coding to a 10-year-old. ONLY use the simplest words. Use toy, food, game analogies ONLY. Use emojis freely.',chips:['What is programming?','What is a variable? (simple)','What does a computer do?','Why do we code?']}
 };
 
-function setMode(m,el){
-  chatMode=m;
-  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('modeLabel').textContent=modes[m].label;
-  document.getElementById('msgs').innerHTML='<div class="msg"><div class="msg-av ai-av">AI</div><div><div class="msg-lbl">'+modes[m].label.split('·')[0].trim()+'</div><div class="msg-bubble">Switched to <strong>'+m+'</strong> mode!</div></div></div>';
-  document.getElementById('chipsContainer').innerHTML=modes[m].chips.map(c=>'<span class="chip" onclick="useChip(this)">'+c+'</span>').join('');
-  document.getElementById('chipsWrap').style.display='block';
-}
-
+function setMode(m,el){chatMode=m;currentChatId=null;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('modeLabel').textContent=modes[m].label;document.getElementById('msgs').innerHTML='<div class="msg"><div class="msg-av ai-av">AI</div><div><div class="msg-lbl">'+modes[m].label.split('·')[0].trim()+'</div><div class="msg-bubble">Switched to <strong>'+m+'</strong> mode!</div></div></div>';document.getElementById('chipsContainer').innerHTML=modes[m].chips.map(c=>'<span class="chip" onclick="useChip(this)">'+c+'</span>').join('');document.getElementById('chipsWrap').style.display='block';}
 function useChip(el){document.getElementById('chatTa').value=el.textContent;sendMsg();}
 
 async function sendMsg(){
-  const ta=document.getElementById('chatTa');
-  const text=ta.value.trim();
-  if(!text)return;
+  const ta=document.getElementById('chatTa');const text=ta.value.trim();if(!text)return;
   ta.value='';ta.style.height='42px';
   document.getElementById('chipsWrap').style.display='none';
   appendMsg('user',text);
-  const tw=document.getElementById('typingWrap');
-  tw.style.display='block';
-  document.getElementById('sendBtn').disabled=true;
-  scrollMsgs();
+  const tw=document.getElementById('typingWrap');tw.style.display='block';
+  document.getElementById('sendBtn').disabled=true;scrollMsgs();
   try{
     const d=await api('POST','/api/chat',{systemPrompt:modes[chatMode].system,userMessage:text});
-    tw.style.display='none';
-    appendMsg('ai',d.reply);
-    addXP(10);incStat(0);bumpProgress(1,2);
-    toast('💡 +10 XP!');
-  }catch(e){
-    tw.style.display='none';
-    appendMsg('ai','⚠️ Error: '+e.message);
-  }
-  document.getElementById('sendBtn').disabled=false;
-  scrollMsgs();
+    tw.style.display='none';appendMsg('ai',d.reply);
+    addXP(10);incStat(0);bumpProgress(1,2);toast('💡 +10 XP!');
+    saveChatToHistory(text,d.reply,chatMode);
+  }catch(e){tw.style.display='none';appendMsg('ai','⚠️ Error: '+e.message);}
+  document.getElementById('sendBtn').disabled=false;scrollMsgs();
 }
 
-function appendMsg(role,text){
-  const c=document.getElementById('msgs');
-  const isAI=role==='ai';
-  const div=document.createElement('div');
-  div.className='msg'+(isAI?'':' user-msg');
-  div.innerHTML='<div class="msg-av '+(isAI?'ai-av':'user-av')+'">'+(isAI?'AI':'You')+'</div><div class="msg-bubble">'+renderText(text)+'</div>';
-  c.appendChild(div);
-  scrollMsgs();
-}
-
+function appendMsg(role,text){const c=document.getElementById('msgs');const isAI=role==='ai';const div=document.createElement('div');div.className='msg'+(isAI?'':' user-msg');div.innerHTML='<div class="msg-av '+(isAI?'ai-av':'user-av')+'">'+(isAI?'AI':'You')+'</div><div class="msg-bubble">'+renderText(text)+'</div>';c.appendChild(div);scrollMsgs();}
 function scrollMsgs(){const c=document.getElementById('msgs');c.scrollTop=c.scrollHeight;}
-
-function renderText(t){
-  t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  var bt='\x60';
-  var tripleRe=new RegExp(bt+bt+bt+'(\\w+)?\\n?([\\s\\S]*?)'+bt+bt+bt,'g');
-  var singleRe=new RegExp(bt+'([^'+bt+']+)'+bt,'g');
-  t=t.replace(tripleRe,function(_,l,code){return '<div class="msg-code">'+code.trim()+'</div>';});
-  t=t.replace(singleRe,'<span class="msg-icode">$1</span>');
-  t=t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-  t=t.replace(/\n/g,'<br>');
-  return t;
-}
+function renderText(t){t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');var bt='\x60';var tripleRe=new RegExp(bt+bt+bt+'(\\w+)?\\n?([\\s\\S]*?)'+bt+bt+bt,'g');var singleRe=new RegExp(bt+'([^'+bt+']+)'+bt,'g');t=t.replace(tripleRe,function(_,l,code){return '<div class="msg-code">'+code.trim()+'</div>';});t=t.replace(singleRe,'<span class="msg-icode">$1</span>');t=t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');t=t.replace(/\n/g,'<br>');return t;}
 
 document.addEventListener('DOMContentLoaded',function(){
-  // Chat textarea enter key
   var ta=document.getElementById('chatTa');
   if(ta)ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}});
-
-  // Hero buttons
-  var quizBtn=document.getElementById('heroQuizBtn');
-  if(quizBtn)quizBtn.addEventListener('click',function(){
-    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-    document.getElementById('page-quiz').classList.add('active');
-    document.querySelectorAll('.s-item').forEach(function(i){i.classList.remove('active');});
-    document.querySelectorAll('.s-item')[2].classList.add('active');
-    document.getElementById('vTopics').style.display='block';
-    document.getElementById('vLoading').style.display='none';
-    document.getElementById('vQuestion').style.display='none';
-    document.getElementById('vResult').style.display='none';
-  });
-
   var mentorBtn=document.getElementById('heroMentorBtn');
-  if(mentorBtn)mentorBtn.addEventListener('click',function(){
-    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-    document.getElementById('page-chat').classList.add('active');
-    document.querySelectorAll('.s-item').forEach(function(i){i.classList.remove('active');});
-    document.querySelectorAll('.s-item')[1].classList.add('active');
-  });
+  if(mentorBtn)mentorBtn.addEventListener('click',function(){navTo('chat');});
 });
 
-let Qs=[],qIdx=0,qCorrect=0,qStart=0,qTimer=null;
+// ── QUIZ ──────────────────────────────────────────
+let Qs=[],qIdx=0,qCorrect=0,qStart=0,qTimer=null,qCurrentTopic='';
 
-function pickTopic(topic){
-  document.getElementById('vTopics').style.display='none';
-  document.getElementById('vLoading').style.display='block';
-  document.getElementById('loadTopic').textContent=topic.split(' ').slice(0,4).join(' ');
-  generateQuiz(topic);
-}
+function pickTopic(topic){qCurrentTopic=topic;document.getElementById('vTopics').style.display='none';document.getElementById('vLoading').style.display='block';document.getElementById('loadTopic').textContent=topic.split(' ').slice(0,4).join(' ');generateQuiz(topic);}
 
 async function generateQuiz(topic){
-  try{
-    const d=await api('POST','/api/quiz',{topic});
-    Qs=d.questions;
-    qIdx=0;qCorrect=0;qStart=Date.now();startClock();
-    document.getElementById('vLoading').style.display='none';
-    document.getElementById('vQuestion').style.display='block';
-    renderQ();
-  }catch(e){
-    document.getElementById('vLoading').innerHTML='<div style="color:var(--red);padding:40px;font-size:14px">Failed: '+e.message+'<br><br><button class="btn" onclick="resetQuiz()">← Back</button></div>';
-  }
+  try{const d=await api('POST','/api/quiz',{topic});Qs=d.questions;qIdx=0;qCorrect=0;qStart=Date.now();startClock();document.getElementById('vLoading').style.display='none';document.getElementById('vQuestion').style.display='block';renderQ();}
+  catch(e){document.getElementById('vLoading').innerHTML='<div style="color:var(--red);padding:40px;font-size:14px">Failed: '+e.message+'<br><br><button class="btn" onclick="resetQuiz()">← Back</button></div>';}
 }
 
-function startClock(){
-  if(qTimer)clearInterval(qTimer);
-  qTimer=setInterval(function(){
-    const s=Math.floor((Date.now()-qStart)/1000);
-    const el=document.getElementById('qClock');
-    if(el)el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-  },1000);
-}
-
-function renderQ(){
-  const q=Qs[qIdx];
-  document.getElementById('qBar').style.width=(qIdx/Qs.length*100)+'%';
-  document.getElementById('qStep').textContent='Question '+(qIdx+1)+' of '+Qs.length;
-  document.getElementById('qText').innerHTML=q.q;
-  document.getElementById('qExp').style.display='none';
-  document.getElementById('qNext').style.display='none';
-  const L=['A','B','C','D'];
-  document.getElementById('qOpts').innerHTML=q.options.map(function(o,i){
-    return '<div class="q-opt" onclick="pickOpt('+i+')"><span class="opt-k">'+L[i]+'</span>'+o.replace(/^[A-D]\)\s*/,'')+'</div>';
-  }).join('');
-}
-
-function pickOpt(i){
-  const q=Qs[qIdx];
-  document.querySelectorAll('.q-opt').forEach(function(o){o.style.pointerEvents='none';});
-  const opts=document.querySelectorAll('.q-opt');
-  if(i===q.correct){opts[i].classList.add('correct');qCorrect++;toast('✅ Correct! +20 XP');}
-  else{opts[i].classList.add('wrong');opts[q.correct].classList.add('correct');toast('❌ Not quite!');}
-  document.getElementById('qExp').innerHTML='💡 <strong>Explanation:</strong> '+q.explain;
-  document.getElementById('qExp').style.display='block';
-  document.getElementById('qNext').style.display='inline-flex';
-}
-
+function startClock(){if(qTimer)clearInterval(qTimer);qTimer=setInterval(function(){const s=Math.floor((Date.now()-qStart)/1000);const el=document.getElementById('qClock');if(el)el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');},1000);}
+function renderQ(){const q=Qs[qIdx];document.getElementById('qBar').style.width=(qIdx/Qs.length*100)+'%';document.getElementById('qStep').textContent='Question '+(qIdx+1)+' of '+Qs.length;document.getElementById('qText').innerHTML=q.q;document.getElementById('qExp').style.display='none';document.getElementById('qNext').style.display='none';const L=['A','B','C','D'];document.getElementById('qOpts').innerHTML=q.options.map(function(o,i){return '<div class="q-opt" onclick="pickOpt('+i+')"><span class="opt-k">'+L[i]+'</span>'+o.replace(/^[A-D]\)\s*/,'')+'</div>';}).join('');}
+function pickOpt(i){const q=Qs[qIdx];document.querySelectorAll('.q-opt').forEach(function(o){o.style.pointerEvents='none';});const opts=document.querySelectorAll('.q-opt');if(i===q.correct){opts[i].classList.add('correct');qCorrect++;toast('✅ Correct! +20 XP');}else{opts[i].classList.add('wrong');opts[q.correct].classList.add('correct');toast('❌ Not quite!');}document.getElementById('qExp').innerHTML='💡 <strong>Explanation:</strong> '+q.explain;document.getElementById('qExp').style.display='block';document.getElementById('qNext').style.display='inline-flex';}
 function nextQ(){qIdx++;if(qIdx>=Qs.length){clearInterval(qTimer);showQuizResult();}else renderQ();}
 
 function showQuizResult(){
-  document.getElementById('vQuestion').style.display='none';
-  document.getElementById('vResult').style.display='block';
-  const pct=Math.round(qCorrect/Qs.length*100);
-  const secs=Math.floor((Date.now()-qStart)/1000);
-  const xp=qCorrect*20+(pct===100?50:0);
-  document.getElementById('rScore').textContent=qCorrect+'/'+Qs.length;
-  document.getElementById('rXP').textContent='+'+xp;
-  document.getElementById('rTime').textContent=Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
-  document.getElementById('rEm').textContent=pct>=80?'🎉':pct>=60?'😊':'💪';
-  document.getElementById('rTitle').textContent=pct>=80?'Excellent!':pct>=60?'Good Job!':'Keep Going!';
-  document.getElementById('rSub').textContent=pct+'% — '+(pct>=80?'You really know this!':pct>=60?'Nice work!':'Every attempt teaches something!');
-  addXP(xp);incStat(1);bumpProgress(1,5);
-  toast('🏆 +'+xp+' XP earned!');
+  document.getElementById('vQuestion').style.display='none';document.getElementById('vResult').style.display='block';
+  const pct=Math.round(qCorrect/Qs.length*100);const secs=Math.floor((Date.now()-qStart)/1000);const xp=qCorrect*20+(pct===100?50:0);
+  document.getElementById('rScore').textContent=qCorrect+'/'+Qs.length;document.getElementById('rXP').textContent='+'+xp;document.getElementById('rTime').textContent=Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
+  document.getElementById('rEm').textContent=pct>=80?'🎉':pct>=60?'😊':'💪';document.getElementById('rTitle').textContent=pct>=80?'Excellent!':pct>=60?'Good Job!':'Keep Going!';document.getElementById('rSub').textContent=pct+'% — '+(pct>=80?'You really know this!':pct>=60?'Nice work!':'Every attempt teaches something!');
+  addXP(xp);incStat(1);bumpProgress(1,5);toast('🏆 +'+xp+' XP earned!');
+  saveQuizToHistory(qCurrentTopic,qCorrect,Qs.length,secs,Qs);
 }
 
-function retryQ(){
-  document.getElementById('vResult').style.display='none';
-  qIdx=0;qCorrect=0;qStart=Date.now();startClock();
-  document.getElementById('vQuestion').style.display='block';
-  renderQ();
-}
+function retryQ(){document.getElementById('vResult').style.display='none';qIdx=0;qCorrect=0;qStart=Date.now();startClock();document.getElementById('vQuestion').style.display='block';renderQ();}
+function resetQuiz(){['vResult','vQuestion','vLoading'].forEach(function(id){document.getElementById(id).style.display='none';});document.getElementById('vTopics').style.display='block';}
 
-function resetQuiz(){
-  ['vResult','vQuestion','vLoading'].forEach(function(id){document.getElementById(id).style.display='none';});
-  document.getElementById('vTopics').style.display='block';
-}
-
-function setRevTab(tab,el){
-  document.querySelectorAll('.rev-tab').forEach(function(t){t.classList.remove('active');});
-  el.classList.add('active');
-  document.getElementById('descBlock').style.display=tab==='desc'?'block':'none';
-}
-
-function loadSample(){
-  document.getElementById('codeArea').value='function calculateAverage(numbers) {\n  var total = 0;\n  for (var i = 0; i <= numbers.length; i++) {\n    total = total + numbers[i];\n  }\n  return total / numbers.length;\n}';
-  document.getElementById('revLang').value='JavaScript';
-}
+// ── CODE REVIEW ───────────────────────────────────
+function setRevTab(tab,el){document.querySelectorAll('.rev-tab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');document.getElementById('descBlock').style.display=tab==='desc'?'block':'none';}
+function loadSample(){document.getElementById('codeArea').value='function calculateAverage(numbers) {\n  var total = 0;\n  for (var i = 0; i <= numbers.length; i++) {\n    total = total + numbers[i];\n  }\n  return total / numbers.length;\n}';document.getElementById('revLang').value='JavaScript';}
 
 async function doReview(){
-  const code=document.getElementById('codeArea').value.trim();
-  if(!code||code.length<8){toast('Please paste some code first!');return;}
-  const btn=document.getElementById('revBtn');
-  btn.disabled=true;
-  btn.innerHTML='<span style="opacity:.6">Analysing...</span>';
-  try{
-    const d=await api('POST','/api/review',{
-      code:code,
-      lang:document.getElementById('revLang').value,
-      beginner:document.getElementById('chkBeg').checked,
-      rewrite:document.getElementById('chkRw').checked,
-      desc:document.getElementById('descTa')?document.getElementById('descTa').value.trim():''
-    });
-    renderReview(d.review,document.getElementById('chkRw').checked);
-    addXP(15);incStat(2);bumpProgress(1,3);
-    toast('✅ Review done! +15 XP');
-  }catch(e){
-    document.getElementById('revResult').style.display='block';
-    document.getElementById('revResult').innerHTML='<div style="color:var(--red);padding:18px;background:var(--red-l);border-radius:var(--r)">⚠️ '+e.message+'</div>';
+  const code=document.getElementById('codeArea').value.trim();if(!code||code.length<8){toast('Please paste some code first!');return;}
+  const btn=document.getElementById('revBtn');btn.disabled=true;btn.innerHTML='<span style="opacity:.6">Analysing...</span>';
+  try{const d=await api('POST','/api/review',{code,lang:document.getElementById('revLang').value,beginner:document.getElementById('chkBeg').checked,rewrite:document.getElementById('chkRw').checked,desc:document.getElementById('descTa')?document.getElementById('descTa').value.trim():''});renderReview(d.review,document.getElementById('chkRw').checked);addXP(15);incStat(2);bumpProgress(1,3);toast('✅ Review done! +15 XP');}
+  catch(e){document.getElementById('revResult').style.display='block';document.getElementById('revResult').innerHTML='<div style="color:var(--red);padding:18px;background:var(--red-l);border-radius:var(--r)">⚠️ '+e.message+'</div>';}
+  btn.disabled=false;btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Review My Code';
+}
+
+function renderReview(r,showRw){const el=document.getElementById('revResult');el.style.display='block';const sc=r.overall;const col=sc>=80?'var(--teal)':sc>=60?'var(--gold)':'var(--orange)';const tm={good:{cls:'fb-good',ic:'✓'},warn:{cls:'fb-warn',ic:'⚠'},bad:{cls:'fb-bad',ic:'✕'}};const issues=(r.issues||[]).map(function(i){return '<div class="fb '+(tm[i.type]?tm[i.type].cls:'fb-warn')+'"><span class="fbi">'+(tm[i.type]?tm[i.type].ic:'•')+'</span><span>'+i.text+'</span></div>';}).join('');const rwHtml=showRw&&r.rewrite?'<div class="rw-block"><h4>✨ Improved Version</h4><div class="rw-code">'+r.rewrite.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div></div>':'';el.innerHTML='<div class="rev-result"><div class="score-big"><div class="score-num" style="color:'+col+'">'+r.overall+'</div><div><div class="score-label">Grade '+(r.grade||'')+'</div><div class="score-desc">'+(r.summary||'')+'</div></div></div><div class="metrics-row"><div class="metric-cell"><div class="metric-val" style="color:var(--teal)">'+(r.metrics?r.metrics.readability:0)+'</div><div class="metric-lbl">Readability</div></div><div class="metric-cell"><div class="metric-val" style="color:var(--purple)">'+(r.metrics?r.metrics.correctness:0)+'</div><div class="metric-lbl">Correctness</div></div><div class="metric-cell"><div class="metric-val" style="color:var(--gold)">'+(r.metrics?r.metrics.bestPractices:0)+'</div><div class="metric-lbl">Best Practices</div></div></div><div class="fb-list">'+issues+'</div>'+rwHtml+'</div>';}
+
+// ── ROADMAP ───────────────────────────────────────
+const rmData=[{done:true,title:'What is Programming?',sub:'How computers work, your first Hello World',tags:['basics','syntax']},{done:true,title:'Variables & Data Types',sub:'Storing numbers, text, booleans',tags:['let','const','string']},{done:true,title:'Conditions (If/Else)',sub:'Making decisions in code',tags:['if','else','boolean']},{active:true,title:'Functions',sub:'Reusable blocks, parameters, return values',tags:['function','return']},{title:'Loops',sub:'for/while loops, iterating arrays',tags:['for','while','forEach']},{title:'Arrays & Objects',sub:'Collections, key-value pairs, methods',tags:['array','object','map']},{locked:true,title:'DOM & Web Pages',sub:'Making pages respond to user input',tags:['DOM','events']},{locked:true,title:'APIs & Fetch',sub:'Getting data from the internet',tags:['fetch','async','JSON']}];
+
+function renderRoadmap(){const done=rmData.filter(function(s){return s.done;}).length;const pct=Math.round(done/rmData.length*100);document.getElementById('rmPct').textContent=pct+'% done';document.getElementById('rmBar').style.width=pct+'%';document.getElementById('rmContainer').innerHTML=rmData.map(function(s,i){const dotCls=s.done?'done':s.active?'now':s.locked?'lock':'';const icon=s.done?'✓':s.active?'▶':s.locked?'🔒':(i+1);const nowBadge=s.active?'<span class="now-badge">You are here</span>':'';const learnBtn=s.active?'<button class="btn btn-primary btn-sm" style="margin-top:9px" onclick="startFunctions()">Start learning &#8594;</button>':'';return '<div class="rm-row"><div class="rm-spine"><div class="rm-dot '+dotCls+'">'+icon+'</div>'+(i<rmData.length-1?'<div class="rm-line '+(s.done?'done':'')+'"></div>':'')+'</div><div class="rm-info '+(s.active?'now':'')+'"><div class="rm-info-title">'+s.title+' '+nowBadge+'</div><div class="rm-info-sub">'+s.sub+'</div><div class="rm-chips">'+s.tags.map(function(t){return '<span class="rm-chip">'+t+'</span>';}).join('')+'</div>'+learnBtn+'</div></div>';}).join('');}
+function renderAchievements(){const ud=currentUser;const xp=ud.xp||0;const all=[{icon:'🌱',name:'First Steps',desc:'Asked your first question',xp:'+20 XP',earned:(ud.stats||[])[0]>0},{icon:'🔥',name:'On a Roll',desc:'Completed a quiz',xp:'+30 XP',earned:(ud.stats||[])[1]>0},{icon:'🧠',name:'Quiz Fan',desc:'Completed 3 quizzes',xp:'+50 XP',earned:(ud.stats||[])[1]>=3},{icon:'🔍',name:'Code Critic',desc:'Got code reviewed',xp:'+25 XP',earned:(ud.stats||[])[2]>0},{icon:'⚡',name:'Century Club',desc:'Earned 100+ XP',xp:'+50 XP',earned:xp>=100},{icon:'🏆',name:'Dedicated',desc:'Earned 500+ XP',xp:'+100 XP',earned:xp>=500}];document.getElementById('achievements').innerHTML=all.map(function(a){return '<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);'+(a.earned?'background:var(--teal-l);border:1.5px solid #00c9a725':'background:var(--bg);border:1.5px solid var(--border);opacity:.5')+'"><span style="font-size:22px">'+a.icon+'</span><div><div style="font-size:13px;font-weight:700">'+a.name+'</div><div style="font-size:11.5px;color:var(--text2)">'+a.desc+'</div></div><span style="font-family:var(--mono);font-size:11.5px;color:'+(a.earned?'var(--teal)':'var(--text3)')+';font-weight:700;margin-left:auto">'+(a.earned?a.xp:'Locked')+'</span></div>';}).join('');}
+function startFunctions(){quickLearn('Teach me about functions in JavaScript for a complete beginner. Start from the very beginning.');}
+
+// ── HISTORY ───────────────────────────────────────
+function switchHistoryTab(tab){
+  var chatPanel=document.getElementById('hChatPanel');var quizPanel=document.getElementById('hQuizPanel');var detail=document.getElementById('hChatDetail');
+  var chatBtn=document.getElementById('hTabChat');var quizBtn=document.getElementById('hTabQuiz');
+  detail.style.display='none';
+  if(tab==='chat'){
+    chatPanel.style.display='block';quizPanel.style.display='none';
+    chatBtn.className='h-tab-btn active';quizBtn.className='h-tab-btn';
+    loadChatHistory();
+  }else{
+    chatPanel.style.display='none';quizPanel.style.display='block';
+    quizBtn.className='h-tab-btn active';chatBtn.className='h-tab-btn';
+    loadQuizHistory();
   }
-  btn.disabled=false;
-  btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Review My Code';
 }
 
-function renderReview(r,showRw){
-  const el=document.getElementById('revResult');
-  el.style.display='block';
-  const sc=r.overall;
-  const col=sc>=80?'var(--teal)':sc>=60?'var(--gold)':'var(--orange)';
-  const tm={good:{cls:'fb-good',ic:'✓'},warn:{cls:'fb-warn',ic:'⚠'},bad:{cls:'fb-bad',ic:'✕'}};
-  const issues=(r.issues||[]).map(function(i){return '<div class="fb '+(tm[i.type]?tm[i.type].cls:'fb-warn')+'"><span class="fbi">'+(tm[i.type]?tm[i.type].ic:'•')+'</span><span>'+i.text+'</span></div>';}).join('');
-  const rwHtml=showRw&&r.rewrite?'<div class="rw-block"><h4>✨ Improved Version</h4><div class="rw-code">'+r.rewrite.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div></div>':'';
-  el.innerHTML='<div class="rev-result"><div class="score-big"><div class="score-num" style="color:'+col+'">'+r.overall+'</div><div><div class="score-label">Grade '+(r.grade||'')+'</div><div class="score-desc">'+(r.summary||'')+'</div></div></div><div class="metrics-row"><div class="metric-cell"><div class="metric-val" style="color:var(--teal)">'+(r.metrics?r.metrics.readability:0)+'</div><div class="metric-lbl">Readability</div></div><div class="metric-cell"><div class="metric-val" style="color:var(--purple)">'+(r.metrics?r.metrics.correctness:0)+'</div><div class="metric-lbl">Correctness</div></div><div class="metric-cell"><div class="metric-val" style="color:var(--gold)">'+(r.metrics?r.metrics.bestPractices:0)+'</div><div class="metric-lbl">Best Practices</div></div></div><div class="fb-list">'+issues+'</div>'+rwHtml+'</div>';
+async function loadChatHistory(){
+  if(!JWT_TOKEN){document.getElementById('hChatList').innerHTML='<div class="h-empty"><div class="h-empty-icon">🔐</div><div style="font-size:14px;font-weight:600;margin-bottom:6px">Login to view history</div><div style="font-size:13px">Chat history is saved when you are logged in</div></div>';return;}
+  document.getElementById('hChatList').innerHTML='<div class="h-empty"><div class="h-empty-icon">⏳</div><div>Loading...</div></div>';
+  try{
+    var d=await api('GET','/api/history/chats');
+    if(!d||!d.chats||d.chats.length===0){document.getElementById('hChatList').innerHTML='<div class="h-empty"><div class="h-empty-icon">💬</div><div style="font-size:15px;font-weight:700;margin-bottom:6px">No chats yet</div><div style="font-size:13px">Start chatting with AI Mentor to see your conversations here</div></div>';return;}
+    var modeEmoji={explain:'🧠',debug:'🐛',challenge:'🎯',eli5:'👶'};
+    document.getElementById('hChatList').innerHTML=d.chats.map(function(c){
+      var date=new Date(c.updatedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+      var em=modeEmoji[c.mode]||'💬';
+      return '<div class="h-card" onclick="viewChat(\''+c._id+'\')"><div class="h-card-icon">'+em+'</div><div class="h-card-body"><div class="h-card-title">'+escHtml(c.title)+'</div><div class="h-card-preview">'+escHtml(c.preview||'')+'</div><div class="h-card-meta"><span class="h-badge h-badge-chat">'+c.mode+'</span><span>'+c.messageCount+' msgs</span><span>'+date+'</span></div></div><button class="h-del-btn" onclick="event.stopPropagation();deleteChat(\''+c._id+'\')">🗑</button></div>';
+    }).join('');
+  }catch(e){document.getElementById('hChatList').innerHTML='<div class="h-empty"><div class="h-empty-icon">⚠️</div><div>Failed to load. Please try again.</div></div>';}
 }
 
-const rmData=[
-  {done:true,title:'What is Programming?',sub:'How computers work, your first Hello World',tags:['basics','syntax']},
-  {done:true,title:'Variables & Data Types',sub:'Storing numbers, text, booleans',tags:['let','const','string']},
-  {done:true,title:'Conditions (If/Else)',sub:'Making decisions in code',tags:['if','else','boolean']},
-  {active:true,title:'Functions',sub:'Reusable blocks, parameters, return values',tags:['function','return']},
-  {title:'Loops',sub:'for/while loops, iterating arrays',tags:['for','while','forEach']},
-  {title:'Arrays & Objects',sub:'Collections, key-value pairs, methods',tags:['array','object','map']},
-  {locked:true,title:'DOM & Web Pages',sub:'Making pages respond to user input',tags:['DOM','events']},
-  {locked:true,title:'APIs & Fetch',sub:'Getting data from the internet',tags:['fetch','async','JSON']}
-];
-
-function renderRoadmap(){
-  const done=rmData.filter(function(s){return s.done;}).length;
-  const pct=Math.round(done/rmData.length*100);
-  document.getElementById('rmPct').textContent=pct+'% done';
-  document.getElementById('rmBar').style.width=pct+'%';
-  document.getElementById('rmContainer').innerHTML=rmData.map(function(s,i){
-    const dotCls=s.done?'done':s.active?'now':s.locked?'lock':'';
-    const icon=s.done?'✓':s.active?'▶':s.locked?'🔒':(i+1);
-    const nowBadge=s.active?'<span class="now-badge">You are here</span>':'';
-        const learnBtn=s.active?'<button class="btn btn-primary btn-sm" style="margin-top:9px" onclick="startFunctions()">Start learning &#8594;</button>':'';
-    return '<div class="rm-row"><div class="rm-spine"><div class="rm-dot '+dotCls+'">'+icon+'</div>'+(i<rmData.length-1?'<div class="rm-line '+(s.done?'done':'')+'"></div>':'')+'</div><div class="rm-info '+(s.active?'now':'')+'"><div class="rm-info-title">'+s.title+' '+nowBadge+'</div><div class="rm-info-sub">'+s.sub+'</div><div class="rm-chips">'+s.tags.map(function(t){return '<span class="rm-chip">'+t+'</span>';}).join('')+'</div>'+learnBtn+'</div></div>';
-  }).join('');
+async function viewChat(id){
+  document.getElementById('hChatPanel').style.display='none';
+  var detail=document.getElementById('hChatDetail');var content=document.getElementById('hChatDetailContent');
+  detail.style.display='block';
+  content.innerHTML='<div class="h-empty"><div class="h-empty-icon">⏳</div><div>Loading conversation...</div></div>';
+  try{
+    var d=await api('GET','/api/history/chat/'+id);var chat=d.chat;
+    var date=new Date(chat.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+    content.innerHTML='<div style="margin-bottom:16px;padding:14px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r)"><div style="font-size:16px;font-weight:700">'+escHtml(chat.title)+'</div><div style="font-size:12px;color:var(--text2);margin-top:4px">'+date+' · '+chat.messages.length+' messages · '+chat.mode+' mode</div></div>'+
+      chat.messages.map(function(m){return '<div class="h-msg '+(m.role==='user'?'h-msg-user':'h-msg-ai')+'"><div class="h-msg-role">'+(m.role==='user'?'You':'AI Mentor')+'</div><div>'+escHtml(m.content)+'</div></div>';}).join('');
+  }catch(e){content.innerHTML='<div style="color:var(--red);padding:20px">Failed to load conversation.</div>';}
 }
 
-function renderAchievements(){
-  const ud=currentUser;
-  const xp=ud.xp||0;
-  const all=[
-    {icon:'🌱',name:'First Steps',desc:'Asked your first question',xp:'+20 XP',earned:(ud.stats||[])[0]>0},
-    {icon:'🔥',name:'On a Roll',desc:'Completed a quiz',xp:'+30 XP',earned:(ud.stats||[])[1]>0},
-    {icon:'🧠',name:'Quiz Fan',desc:'Completed 3 quizzes',xp:'+50 XP',earned:(ud.stats||[])[1]>=3},
-    {icon:'🔍',name:'Code Critic',desc:'Got code reviewed',xp:'+25 XP',earned:(ud.stats||[])[2]>0},
-    {icon:'⚡',name:'Century Club',desc:'Earned 100+ XP',xp:'+50 XP',earned:xp>=100},
-    {icon:'🏆',name:'Dedicated',desc:'Earned 500+ XP',xp:'+100 XP',earned:xp>=500}
-  ];
-  document.getElementById('achievements').innerHTML=all.map(function(a){
-    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);'+(a.earned?'background:var(--teal-l);border:1.5px solid #00c9a725':'background:var(--bg);border:1.5px solid var(--border);opacity:.5')+'"><span style="font-size:22px">'+a.icon+'</span><div><div style="font-size:13px;font-weight:700">'+a.name+'</div><div style="font-size:11.5px;color:var(--text2)">'+a.desc+'</div></div><span style="font-family:var(--mono);font-size:11.5px;color:'+(a.earned?'var(--teal)':'var(--text3)')+';font-weight:700;margin-left:auto">'+(a.earned?a.xp:'Locked')+'</span></div>';
-  }).join('');
+async function deleteChat(id){
+  if(!confirm('Delete this chat permanently?'))return;
+  try{await api('DELETE','/api/history/chat/'+id);toast('🗑 Chat deleted');loadChatHistory();}
+  catch(e){toast('Failed to delete');}
 }
 
-function startFunctions(){
-  quickLearn('Teach me about functions in JavaScript for a complete beginner. Start from the very beginning.');
+async function loadQuizHistory(){
+  if(!JWT_TOKEN){document.getElementById('hQuizList').innerHTML='<div class="h-empty"><div class="h-empty-icon">🔐</div><div style="font-size:14px;font-weight:600;margin-bottom:6px">Login to view history</div><div style="font-size:13px">Quiz results are saved when you are logged in</div></div>';return;}
+  document.getElementById('hQuizList').innerHTML='<div class="h-empty"><div class="h-empty-icon">⏳</div><div>Loading...</div></div>';
+  try{
+    var d=await api('GET','/api/history/quizzes');
+    if(!d||!d.quizzes||d.quizzes.length===0){document.getElementById('hQuizList').innerHTML='<div class="h-empty"><div class="h-empty-icon">🎯</div><div style="font-size:15px;font-weight:700;margin-bottom:6px">No quizzes yet</div><div style="font-size:13px">Take a quiz to see your results here</div></div>';return;}
+    document.getElementById('hQuizList').innerHTML=d.quizzes.map(function(q){
+      var pct=Math.round(q.score/q.total*100);var col=pct>=80?'var(--teal)':pct>=60?'var(--gold)':'var(--orange)';
+      var em=pct>=80?'🎉':pct>=60?'😊':'💪';
+      var date=new Date(q.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+      var mins=Math.floor(q.timeTaken/60);var secs=String(q.timeTaken%60).padStart(2,'0');
+      return '<div class="h-card"><div class="h-card-icon">'+em+'</div><div class="h-card-body"><div class="h-card-title">'+escHtml(q.topic.split(' ').slice(0,6).join(' '))+'</div><div class="h-card-meta"><span class="h-badge h-badge-quiz">'+q.score+'/'+q.total+' correct</span><span style="color:'+col+';font-weight:700">'+pct+'%</span><span>⏱ '+mins+':'+secs+'</span><span>'+date+'</span></div></div></div>';
+    }).join('');
+  }catch(e){document.getElementById('hQuizList').innerHTML='<div class="h-empty"><div class="h-empty-icon">⚠️</div><div>Failed to load. Please try again.</div></div>';}
 }
 
-function toast(msg){
-  const t=document.getElementById('toast');
-  document.getElementById('toastMsg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},3000);
+function closeHistoryDetail(){document.getElementById('hChatDetail').style.display='none';document.getElementById('hChatPanel').style.display='block';}
+function escHtml(str){if(!str)return '';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+async function saveChatToHistory(userMsg,aiReply,mode){
+  if(!JWT_TOKEN)return;
+  try{var d=await api('POST','/api/history/chat',{chatId:currentChatId,userMessage:userMsg,aiReply:aiReply,mode:mode});if(d)currentChatId=d.chatId;}
+  catch(e){console.warn('History save failed:',e.message);}
 }
+
+async function saveQuizToHistory(topic,score,total,timeTaken,questions){
+  if(!JWT_TOKEN)return;
+  try{await api('POST','/api/history/quiz',{topic,score,total,timeTaken,questions});}
+  catch(e){console.warn('Quiz history save failed:',e.message);}
+}
+
+// ── TOAST ─────────────────────────────────────────
+function toast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
 </script>
 </body>
 </html>
