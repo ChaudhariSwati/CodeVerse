@@ -15,13 +15,18 @@ require('dotenv').config();
 const app = express();
 
 // ── SECURITY CHECK ON STARTUP ────────────────────
-const REQUIRED_ENV = ['MONGO_URI', 'GROQ_API_KEY', 'JWT_SECRET'];
+const REQUIRED_ENV = ['MONGO_URI', 'JWT_SECRET'];
 REQUIRED_ENV.forEach(key => {
   if (!process.env[key]) {
     console.error(`❌ Missing required environment variable: ${key}`);
     process.exit(1);
   }
 });
+
+if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY) {
+  console.error('❌ Missing required environment variable: GROQ_API_KEY or GEMINI_API_KEY');
+  process.exit(1);
+}
 
 const SECRET = process.env.JWT_SECRET;
 
@@ -310,14 +315,18 @@ app.patch('/user/progress', authRequired, async (req, res) => {
 });
 
 // ══════════════════════════════════════════════════
-// GROQ AI
+// AI BACKEND SUPPORT
 // ══════════════════════════════════════════════════
 
 const GROQ_KEY   = process.env.GROQ_API_KEY;
 const GROQ_URL   = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL = 'llama-3.3-70b-versatile';
 
+const GEMINI_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_URL = 'https://api.labs.google.com/v1beta2/models/gemini-1.5-mini:predict';
+
 async function callGroq(systemPrompt, userPrompt) {
+  if (!GROQ_KEY) throw new Error('Groq API key is not configured');
   let response;
   try {
     response = await fetch(GROQ_URL, {
@@ -351,6 +360,128 @@ async function callGroq(systemPrompt, userPrompt) {
   return data.choices[0].message.content;
 }
 
+function parseGeminiResponse(data) {
+  const candidate = data.candidates?.[0] || data.predictions?.[0] || data;
+  if (!candidate) throw new Error('Empty Gemini response');
+
+  const contentBlocks = candidate.content || candidate.output?.[0]?.content || [];
+  if (Array.isArray(contentBlocks) && contentBlocks.length > 0) {
+    return contentBlocks.map(block => block.text || '').join('');
+  }
+
+  if (typeof candidate.text === 'string') return candidate.text;
+  if (typeof data.text === 'string') return data.text;
+
+  throw new Error('Unable to parse Gemini response');
+}
+
+function simpleFallbackMentorReply(prompt) {
+  const text = (prompt || '').trim().toLowerCase();
+  if (!text) return 'I am here to help with your coding questions — ask me anything!';
+
+  if (text.includes('variable')) {
+    return 'A variable is a named container for a value in your program. You can use it to store text, numbers, or other data and change it later when the program runs.';
+  }
+  if (text.includes('function')) {
+    return 'A function is a reusable block of code that performs a specific task. You give it a name, pass in inputs, and it can return a result or do work for you.';
+  }
+  if (text.includes('if else') || text.includes('if/else') || (text.includes('if') && text.includes('else'))) {
+    return 'An if/else statement lets your program make a decision. If a condition is true, one block runs; otherwise, the alternative block runs.';
+  }
+  if (text.includes('loop') || text.includes('for') || text.includes('while')) {
+    return 'A loop repeats code until a condition is met. Use loops when you need to run the same steps many times, like processing each item in a list.';
+  }
+  if (text.includes('array') || text.includes('list')) {
+    return 'An array is a collection of values stored in order. You can access each item by its position and loop through the array to work with every element.';
+  }
+  if (text.includes('class') || text.includes('object')) {
+    return 'A class defines a blueprint for objects that bundle data and behavior together. Objects created from a class can represent real-world things in your code.';
+  }
+  if (text.includes('error') || text.includes('bug')) {
+    return 'When you see an error, read the message carefully. It usually tells you what went wrong and where, so you can fix the code step by step.';
+  }
+
+  return 'I could not reach the AI service right now, but here is a fallback mentor answer: Please ask your coding question again in simple terms and I will help you understand it clearly.';
+}
+
+async function callGemini(systemPrompt, userPrompt) {
+  if (!GEMINI_KEY) throw new Error('Gemini API key is not configured');
+
+  let response;
+  try {
+    response = await fetch(`${GEMINI_URL}?key=${encodeURIComponent(GEMINI_KEY)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        instances: [
+          { input: `${systemPrompt}\n\n${userPrompt}` }
+        ],
+        parameters: {
+          temperature: 0.7,
+          maxOutputTokens: 1000
+        }
+      })
+    });
+  } catch (networkErr) {
+    throw new Error('Could not reach Gemini API. Check your internet connection.');
+  }
+
+  const data = await response.json();
+  if (!response.ok) {
+    console.error('Gemini API error:', JSON.stringify(data));
+    throw new Error(`Gemini API error: ${response.status} ${response.statusText}`);
+  }
+
+  return parseGeminiResponse(data);
+}
+
+async function callAI(systemPrompt, userPrompt) {
+  const fallback = simpleFallbackMentorReply(userPrompt);
+
+  if (GEMINI_KEY) {
+    try {
+      return await callGemini(systemPrompt, userPrompt);
+    } catch (err) {
+      console.warn('Gemini API failed:', err.message);
+      if (GROQ_KEY) {
+        console.log('Falling back to Groq API due to Gemini failure');
+        try {
+          return await callGroq(systemPrompt, userPrompt);
+        } catch (groqErr) {
+          console.warn('Groq API also failed:', groqErr.message);
+          return fallback;
+        }
+      }
+      return fallback;
+    }
+  }
+
+  if (GROQ_KEY) {
+    try {
+      return await callGroq(systemPrompt, userPrompt);
+    } catch (groqErr) {
+      console.warn('Groq API failed:', groqErr.message);
+      return fallback;
+    }
+  }
+
+  return fallback;
+}
+
+app.post('/api/demo/ai', async (req, res) => {
+  try {
+    const { systemPrompt, userPrompt } = req.body;
+    if (!systemPrompt || !userPrompt) {
+      return res.status(400).json({ error: 'Missing systemPrompt or userPrompt' });
+    }
+    const reply = await callAI(systemPrompt, userPrompt);
+    res.json({ reply });
+  } catch (err) {
+    console.error('Demo AI error:', err.message);
+    res.json({ reply: simpleFallbackMentorReply(req.body?.userPrompt || '') });
+  }
+});
+
 // ── POST /api/chat ───────────────────────────────
 app.post('/api/chat', authRequired, async (req, res) => {
   try {
@@ -362,7 +493,7 @@ app.post('/api/chat', authRequired, async (req, res) => {
       return res.status(400).json({ error: 'Message is too long (max 2000 characters)' });
 
     const system = systemPrompt || 'You are a helpful coding mentor for beginners.';
-    const reply  = await callGroq(system, userMessage.trim());
+    const reply  = await callAI(system, userMessage.trim());
 
     // Auto-save to history (non-blocking — don't fail if save fails)
     const { saveToHistory, mode, historyId } = req.body;
@@ -410,7 +541,7 @@ app.post('/api/quiz', authRequired, async (req, res) => {
 Return ONLY this JSON array format with no extra text:
 [{"q":"question","options":["A) op","B) op","C) op","D) op"],"correct":0,"explain":"text"}]`;
 
-    const raw       = await callGroq(system, prompt);
+    const raw       = await callAI(system, prompt);
     const questions = safeParseJSON(raw);
 
     if (!Array.isArray(questions) || questions.length === 0)
@@ -442,12 +573,332 @@ Code:
 ${code.trim()}
 ${desc ? `\nContext: ${desc}` : ''}`;
 
-    const raw    = await callGroq(system, prompt);
+    const raw    = await callAI(system, prompt);
     const review = safeParseJSON(raw);
     res.json({ review });
   } catch (err) {
     console.error('Review error:', err.message);
     res.status(500).json({ error: err.message || 'Review failed. Please try again.' });
+  }
+});
+
+// ══════════════════════════════════════════════════
+// CODE CHALLENGE ROUTES (JudgeZero Integration)
+// ══════════════════════════════════════════════════
+
+const JUDGER_URL = process.env.JUDGER_API_URL || 'https://judge0-ce.p.rapidapi.com';
+const JUDGER_KEY = process.env.JUDGER_API_KEY;
+const JUDGER_HOST = process.env.JUDGER_HOST || 'judge0-ce.p.rapidapi.com';
+
+// Sample problem statements
+const CODING_PROBLEMS = [
+  {
+    id: 1,
+    title: 'Two Sum',
+    difficulty: 'Easy',
+    description: 'Given an array of integers nums and an integer target, return the indices of the two numbers such that they add up to target. You may assume that each input has exactly one solution, and you may not use the same element twice.',
+    examples: [
+      { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]', explanation: 'Because nums[0] + nums[1] == 9, we return [0, 1].' },
+      { input: 'nums = [3,2,4], target = 6', output: '[1,2]', explanation: 'Because nums[1] + nums[2] == 6, we return [1, 2].' },
+      { input: 'nums = [3,3], target = 6', output: '[0,1]', explanation: 'Two unique indices' },
+      { input: 'nums = [1,2,3], target = 7', output: '[]', explanation: 'No solution exists' }
+    ],
+    testCases: [
+      { input: 'const nums = [2,7,11,15];\nconst target = 9;\nconsole.log(JSON.stringify(twoSum(nums, target)));', expected: '[0,1]' },
+      { input: 'const nums = [3,2,4];\nconst target = 6;\nconsole.log(JSON.stringify(twoSum(nums, target)));', expected: '[1,2]' },
+      { input: 'const nums = [3,3];\nconst target = 6;\nconsole.log(JSON.stringify(twoSum(nums, target)));', expected: '[0,1]' },
+      { input: 'const nums = [1,2,3];\nconst target = 7;\nconsole.log(JSON.stringify(twoSum(nums, target)));', expected: '[]' }
+    ],
+    templateCode: 'function twoSum(nums, target) {\n  // Write your solution here\n  \n}\n\n// Test with the provided numbers\nconsole.log(JSON.stringify(twoSum(nums, target)));',
+    language: 63 // JavaScript
+  },
+  {
+    id: 2,
+    title: 'Reverse String',
+    difficulty: 'Easy',
+    description: 'Write a function that reverses a string. The input string is given as an array of characters s.',
+    examples: [
+      { input: 's = ["h","e","l","l","o"]', output: '["o","l","l","e","h"]', explanation: 'Reversed array' },
+      { input: 's = ["H","a","n","n","a","h"]', output: '["h","a","n","n","a","H"]', explanation: 'Reversed' },
+      { input: 's = ["a"]', output: '["a"]', explanation: 'Single element' },
+      { input: 's = ["a","b"]', output: '["b","a"]', explanation: 'Two elements' }
+    ],
+    testCases: [
+      { input: 'const s = ["h","e","l","l","o"];\nreverseString(s);\nconsole.log(JSON.stringify(s));', expected: '["o","l","l","e","h"]' },
+      { input: 'const s = ["H","a","n","n","a","h"];\nreverseString(s);\nconsole.log(JSON.stringify(s));', expected: '["h","a","n","n","a","H"]' },
+      { input: 'const s = ["a"];\nreverseString(s);\nconsole.log(JSON.stringify(s));', expected: '["a"]' },
+      { input: 'const s = ["a","b"];\nreverseString(s);\nconsole.log(JSON.stringify(s));', expected: '["b","a"]' }
+    ],
+    templateCode: 'function reverseString(s) {\n  // Reverse the array in-place\n  \n}\n\nconsole.log(JSON.stringify(s));',
+    language: 63
+  },
+  {
+    id: 3,
+    title: 'Palindrome Number',
+    difficulty: 'Easy',
+    description: 'Given an integer x, return true if x is palindrome number. An integer is a palindrome when it reads the same backward as forward.',
+    examples: [
+      { input: 'x = 121', output: 'true', explanation: 'Reads same forwards and backwards' },
+      { input: 'x = -121', output: 'false', explanation: 'Negative numbers are not palindromes' },
+      { input: 'x = 10', output: 'false', explanation: 'Reads as 01 backwards = 1' },
+      { input: 'x = 0', output: 'true', explanation: 'Single digit is always palindrome' }
+    ],
+    testCases: [
+      { input: 'const x = 121;\nconsole.log(isPalindrome(x));', expected: 'true' },
+      { input: 'const x = -121;\nconsole.log(isPalindrome(x));', expected: 'false' },
+      { input: 'const x = 10;\nconsole.log(isPalindrome(x));', expected: 'false' },
+      { input: 'const x = 0;\nconsole.log(isPalindrome(x));', expected: 'true' }
+    ],
+    templateCode: 'function isPalindrome(x) {\n  // Check if number is palindrome\n  \n}\n\nconsole.log(isPalindrome(x));',
+    language: 63
+  },
+  {
+    id: 4,
+    title: 'Valid Parentheses',
+    difficulty: 'Easy',
+    description: 'Given a string s containing just the characters "(", ")", "{", "}", "[" and "]", determine if the input string is valid. A string is valid if open brackets are closed by matching brackets.',
+    examples: [
+      { input: 's = "()"', output: 'true', explanation: 'Simple pair' },
+      { input: 's = "()[]{}"', output: 'true', explanation: 'Multiple types' },
+      { input: 's = "(]"', output: 'false', explanation: 'Mismatched brackets' },
+      { input: 's = "([)]"', output: 'false', explanation: 'Interleaved mismatches' }
+    ],
+    testCases: [
+      { input: 'const s = "()";\\nconsole.log(isValid(s));', expected: 'true' },
+      { input: 'const s = "()[]{}";\\nconsole.log(isValid(s));', expected: 'true' },
+      { input: 'const s = "(]";\\nconsole.log(isValid(s));', expected: 'false' },
+      { input: 'const s = "([)]";\\nconsole.log(isValid(s));', expected: 'false' }
+    ],
+    templateCode: 'function isValid(s) {\n  // Check if parentheses are balanced\n  \n}\n\nconsole.log(isValid(s));',
+    language: 63
+  },
+  {
+    id: 5,
+    title: 'Merge Two Sorted Lists',
+    difficulty: 'Easy',
+    description: 'Merge two sorted linked lists and return it as a sorted list. The list should be made by splicing together the nodes of the two lists.',
+    examples: [
+      { input: 'list1 = [1,2,4], list2 = [1,3,4]', output: '[1,1,2,3,4,4]', explanation: 'Merged and sorted' },
+      { input: 'list1 = [], list2 = [0]', output: '[0]', explanation: 'First list empty' },
+      { input: 'list1 = [], list2 = []', output: '[]', explanation: 'Both empty' },
+      { input: 'list1 = [5], list2 = [1,2,6,7]', output: '[1,2,5,6,7]', explanation: 'Different sizes' }
+    ],
+    testCases: [
+      { input: 'const list1 = [1,2,4];\nconst list2 = [1,3,4];\nconsole.log(JSON.stringify(mergeTwoLists(list1, list2)));', expected: '[1,1,2,3,4,4]' },
+      { input: 'const list1 = [];\nconst list2 = [0];\nconsole.log(JSON.stringify(mergeTwoLists(list1, list2)));', expected: '[0]' },
+      { input: 'const list1 = [];\nconst list2 = [];\nconsole.log(JSON.stringify(mergeTwoLists(list1, list2)));', expected: '[]' },
+      { input: 'const list1 = [5];\nconst list2 = [1,2,6,7];\nconsole.log(JSON.stringify(mergeTwoLists(list1, list2)));', expected: '[1,2,5,6,7]' }
+    ],
+    templateCode: 'function mergeTwoLists(list1, list2) {\n  // Merge and sort the two arrays\n  \n}\n\nconsole.log(JSON.stringify(mergeTwoLists(list1, list2)));',
+    language: 63
+  }
+];
+
+// GET /api/problems — Get all problems
+app.get('/api/problems', (req, res) => {
+  try {
+    const problems = CODING_PROBLEMS.map(p => ({
+      id: p.id,
+      title: p.title,
+      difficulty: p.difficulty,
+      description: p.description
+    }));
+    res.json({ problems });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch problems' });
+  }
+});
+
+// GET /api/problems/:id — Get problem details with examples
+app.get('/api/problems/:id', (req, res) => {
+  try {
+    const problem = CODING_PROBLEMS.find(p => p.id === parseInt(req.params.id));
+    if (!problem) return res.status(404).json({ error: 'Problem not found' });
+    
+    res.json({
+      id: problem.id,
+      title: problem.title,
+      difficulty: problem.difficulty,
+      description: problem.description,
+      examples: problem.examples,
+      testCases: problem.testCases,
+      templateCode: problem.templateCode,
+      language: problem.language
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch problem' });
+  }
+});
+
+// POST /api/submit — Submit code for execution
+app.post('/api/submit', async (req, res) => {
+  try {
+    const { code, language, testCases } = req.body;
+
+    if (!code || code.trim().length === 0)
+      return res.status(400).json({ error: 'Please provide code to submit' });
+    if (!language || !testCases || !Array.isArray(testCases))
+      return res.status(400).json({ error: 'Invalid submission format' });
+
+    const results = [];
+
+    for (const testCase of testCases) {
+      try {
+        // Submit code to JudgeZero
+        const submission = await fetch(`${JUDGER_URL}/submissions?wait=true&base64_encoded=false`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': JUDGER_KEY,
+            'X-RapidAPI-Host': JUDGER_HOST
+          },
+          body: JSON.stringify({
+            source_code: code + '\n' + testCase.input,
+            language_id: language,
+            stdin: '',
+            expected_output: testCase.expected
+          })
+        });
+
+        if (!submission.ok) {
+          const err = await submission.text();
+          console.error('JudgeZero error:', err);
+          results.push({
+            input: testCase.input,
+            expected: testCase.expected,
+            status: 'ERROR',
+            message: 'API Error - could not execute code'
+          });
+          continue;
+        }
+
+        const result = await submission.json();
+
+        // Map status codes
+        const statusMap = {
+          1: 'IN_QUEUE',
+          2: 'PROCESSING',
+          3: 'ACCEPTED',
+          4: 'WRONG_ANSWER',
+          5: 'TIME_LIMIT',
+          6: 'COMPILATION_ERROR',
+          7: 'RUNTIME_ERROR',
+          8: 'INTERNAL_ERROR'
+        };
+
+        const status = statusMap[result.status?.id] || 'UNKNOWN';
+        const output = result.stdout ? result.stdout.trim() : '';
+        const stderr = result.stderr ? result.stderr.trim() : '';
+        const compilationError = result.compile_output ? result.compile_output.trim() : '';
+
+        results.push({
+          input: testCase.input,
+          expected: testCase.expected,
+          actual: output,
+          status: status,
+          passed: status === 'ACCEPTED',
+          error: stderr || compilationError || null,
+          executionTime: result.time || 0,
+          memory: result.memory || 0
+        });
+      } catch (err) {
+        console.error('Submission error:', err.message);
+        results.push({
+          input: testCase.input,
+          expected: testCase.expected,
+          status: 'ERROR',
+          message: err.message,
+          passed: false
+        });
+      }
+    }
+
+    // Calculate overall result
+    const passed = results.filter(r => r.passed).length;
+    const total = results.length;
+    const allPassed = passed === total;
+
+    // Save to user history if all passed
+    if (allPassed && req.user) {
+      const problem = CODING_PROBLEMS.find(p => p.testCases === testCases);
+      try {
+        await History.create({
+          userId: req.user.id,
+          type: 'challenge',
+          title: problem ? problem.title : 'Code Challenge',
+          review: {
+            code: code,
+            lang: 'javascript',
+            result: { passed: true, testsPassed: total, totalTests: total }
+          }
+        });
+      } catch (e) {
+        console.warn('History save failed:', e.message);
+      }
+    }
+
+    res.json({
+      testResults: results,
+      summary: {
+        passed: passed,
+        total: total,
+        allPassed: allPassed,
+        successRate: Math.round((passed / total) * 100)
+      }
+    });
+  } catch (err) {
+    console.error('Submit error:', err.message);
+    res.status(500).json({ error: err.message || 'Submission failed' });
+  }
+});
+
+// POST /api/compile — Compile and run code (for practice)
+app.post('/api/compile', async (req, res) => {
+  try {
+    const { code, language } = req.body;
+
+    if (!code || code.trim().length === 0)
+      return res.status(400).json({ error: 'Please provide code to compile' });
+    if (!language || typeof language !== 'number')
+      return res.status(400).json({ error: 'Invalid language specified' });
+
+    // Submit code to JudgeZero for execution
+    const submission = await fetch(`${JUDGER_URL}/submissions?wait=true&base64_encoded=false`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RapidAPI-Key': JUDGER_KEY,
+        'X-RapidAPI-Host': JUDGER_HOST
+      },
+      body: JSON.stringify({
+        source_code: code,
+        language_id: language,
+        stdin: '',
+        expected_output: ''
+      })
+    });
+
+    if (!submission.ok) {
+      const err = await submission.text();
+      console.error('JudgeZero error:', err);
+      return res.status(500).json({ error: 'Compilation service unavailable' });
+    }
+
+    const result = await submission.json();
+
+    // Return the full result
+    res.json({
+      stdout: result.stdout || '',
+      stderr: result.stderr || '',
+      compile_output: result.compile_output || '',
+      status: result.status,
+      time: result.time,
+      memory: result.memory,
+      message: result.message || null
+    });
+  } catch (err) {
+    console.error('Compile error:', err.message);
+    res.status(500).json({ error: err.message || 'Compilation failed' });
   }
 });
 

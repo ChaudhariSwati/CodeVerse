@@ -364,6 +364,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="s-item" onclick="goPage('chat',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AI Mentor</div>
       <div class="s-item" onclick="goPage('quiz',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>AI Quiz<span class="s-badge">New</span></div>
       <div class="s-item" onclick="goPage('review',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Code Review</div>
+      <div class="s-item" onclick="goPage('challenge',this);loadProblems()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/><path d="M12 8v5h3"/></svg>Code Challenges<span class="s-badge">Beta</span></div>
+      <div class="s-item" onclick="goPage('compiler',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Code Compiler</div>
       <div class="s-section">Learning</div>
       <div class="s-item" onclick="goPage('roadmap',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Roadmap</div>
       <div class="s-item" onclick="goPage('history',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</div>
@@ -379,6 +381,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
           <h1 id="heroGreeting">Welcome back! 👋</h1>
           <p>Your AI coding mentor is ready. Ask anything, practice with quizzes, and get your code reviewed — all explained in beginner-friendly language.</p>
           <div class="hero-btns"><button class="btn-white" id="heroMentorBtn">Ask AI Mentor →</button></div>
+          
         </div>
         <div class="stats-row">
           <div class="stat-card sc-purple"><div class="stat-icon" style="background:var(--purple-l)">💬</div><div class="stat-val" style="color:var(--purple)" id="st1">0</div><div class="stat-lbl">Questions Asked</div></div>
@@ -474,6 +477,127 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div id="revResult" style="display:none"></div>
       </div>
 
+      <!-- CODE CHALLENGES -->
+      <div class="page" id="page-challenge">
+        <div class="section-hd"><h2>Coding <span style="color:var(--purple)">Challenges</span></h2><p>LeetCode-style problems with instant code execution & test results</p></div>
+        
+        <!-- Problem List View -->
+        <div id="challengeList">
+          <div class="topic-grid" id="problemsGrid"></div>
+        </div>
+
+        <!-- Problem Solver View -->
+        <div id="challengeSolver" style="display:none;padding:20px 0">
+          <div style="display:flex;gap:15px;align-items:center;margin-bottom:20px">
+            <button class="btn-ghost" onclick="backToChallenges()">← Back to Problems</button>
+            <h3 id="problemTitle" style="margin:0;flex:1"></h3>
+            <span id="problemDiff" style="padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700"></span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px">
+            <!-- Left: Problem Description -->
+            <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:16px">
+              <h4 style="margin:0 0 10px 0;color:var(--text)">Problem Description</h4>
+              <p id="problemDesc" style="font-size:13.5px;line-height:1.6;color:var(--text);margin:0 0 16px 0"></p>
+              
+              <h4 style="margin:16px 0 10px 0;color:var(--text)">Examples</h4>
+              <div id="examplesContainer" style="display:flex;flex-direction:column;gap:8px"></div>
+            </div>
+
+            <!-- Right: Code Editor -->
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);overflow:hidden;flex:1;display:flex;flex-direction:column">
+                <div style="padding:12px 16px;border-bottom:1.5px solid var(--border);background:var(--bg);font-size:13px;font-weight:600;color:var(--text2)">JavaScript Code Editor</div>
+                <textarea class="code-ta" id="solveCode" placeholder="Write your solution here..." style="flex:1;margin:0;border:none;border-radius:0;resize:none"></textarea>
+              </div>
+              <button class="analyze-btn" onclick="submitChallenge(event)" style="margin:0;width:100%">▶ Run Tests</button>
+            </div>
+          </div>
+
+          <!-- Test Results -->
+          <div id="testResults" style="display:none;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:16px">
+            <h4 style="margin:0 0 12px 0">Test Results</h4>
+            <div id="resultsSummary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+              <div style="background:var(--bg);padding:12px;border-radius:var(--r);text-align:center">
+                <div id="passedCount" style="font-size:24px;font-weight:800;color:var(--teal)">0</div>
+                <div style="font-size:11px;color:var(--text2);margin-top:3px">Passed</div>
+              </div>
+              <div style="background:var(--bg);padding:12px;border-radius:var(--r);text-align:center">
+                <div id="totalCount" style="font-size:24px;font-weight:800;color:var(--text)">0</div>
+                <div style="font-size:11px;color:var(--text2);margin-top:3px">Total</div>
+              </div>
+              <div style="background:var(--bg);padding:12px;border-radius:var(--r);text-align:center">
+                <div id="successRate" style="font-size:24px;font-weight:800;color:var(--purple)">0%</div>
+                <div style="font-size:11px;color:var(--text2);margin-top:3px">Success Rate</div>
+              </div>
+            </div>
+            <div id="testCasesList" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CODE COMPILER -->
+      <div class="page" id="page-compiler">
+        <div class="section-hd"><h2>Code <span style="color:var(--purple)">Compiler</span></h2><p>Practice coding in multiple languages with instant compilation and execution</p></div>
+        <div class="g2" style="align-items:start">
+          <div class="card" style="flex:1">
+            <div class="card-title">💻 Code Editor</div>
+            <div style="display:flex;gap:12px;margin-bottom:16px">
+              <select id="langSelect" class="lang-sel" onchange="changeLanguage()">
+                <option value="63">JavaScript (Node.js)</option>
+                <option value="62">Java</option>
+                <option value="54">C++</option>
+                <option value="50">C</option>
+                <option value="71">Python</option>
+                <option value="72">Ruby</option>
+                <option value="73">Go</option>
+                <option value="74">Rust</option>
+                <option value="75">PHP</option>
+                <option value="76">TypeScript</option>
+                <option value="77">Kotlin</option>
+                <option value="78">Swift</option>
+                <option value="79">C#</option>
+              </select>
+              <button class="analyze-btn" onclick="runCode()" id="runBtn">▶ Run Code</button>
+            </div>
+            <textarea id="codeEditor" class="code-ta" placeholder="Write your code here...">// JavaScript Example
+console.log("Hello, World!");
+
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+console.log("Factorial of 5:", factorial(5));</textarea>
+          </div>
+          <div class="card" style="flex:1">
+            <div class="card-title">📤 Output</div>
+            <div id="outputArea" style="background:#1e1b2e;border:1.5px solid #2d2a42;border-radius:10px;padding:15px;font-family:var(--mono);font-size:12.5px;color:#a8d8a8;min-height:200px;max-height:400px;overflow-y:auto;white-space:pre-wrap">Click "Run Code" to execute your program...</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <div class="card-title">📚 Language Examples</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px">
+            <div style="padding:15px;background:var(--bg);border-radius:var(--r);border:1.5px solid var(--border)">
+              <div style="font-weight:700;margin-bottom:8px;color:var(--purple)">JavaScript</div>
+              <div style="font-size:12px;color:var(--text2);font-family:var(--mono);background:#1e1b2e;padding:8px;border-radius:6px">console.log("Hello!");</div>
+            </div>
+            <div style="padding:15px;background:var(--bg);border-radius:var(--r);border:1.5px solid var(--border)">
+              <div style="font-weight:700;margin-bottom:8px;color:var(--purple)">Python</div>
+              <div style="font-size:12px;color:var(--text2);font-family:var(--mono);background:#1e1b2e;padding:8px;border-radius:6px">print("Hello!")</div>
+            </div>
+            <div style="padding:15px;background:var(--bg);border-radius:var(--r);border:1.5px solid var(--border)">
+              <div style="font-weight:700;margin-bottom:8px;color:var(--purple)">Java</div>
+              <div style="font-size:12px;color:var(--text2);font-family:var(--mono);background:#1e1b2e;padding:8px;border-radius:6px">System.out.println("Hello!");</div>
+            </div>
+            <div style="padding:15px;background:var(--bg);border-radius:var(--r);border:1.5px solid var(--border)">
+              <div style="font-weight:700;margin-bottom:8px;color:var(--purple)">C++</div>
+              <div style="font-size:12px;color:var(--text2);font-family:var(--mono);background:#1e1b2e;padding:8px;border-radius:6px">cout << "Hello!" << endl;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ROADMAP -->
       <div class="page" id="page-roadmap">
         <div class="section-hd"><h2>Learning <span style="color:var(--purple)">Roadmap</span></h2><p>Your personalised step-by-step path from zero to confident coder</p></div>
@@ -533,21 +657,16 @@ const SERVER = '';
 let currentUser = null;
 let JWT_TOKEN = localStorage.getItem('nc_token') || null;
 
-// Groq fallback for demo mode
-const GROQ_KEY = 'YOUR_GROQ_KEY_HERE';
-const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
-
 async function callGeminiFallback(systemPrompt, userPrompt) {
-  const r = await fetch(GROQ_URL, {
+  const r = await fetch(SERVER + '/api/demo/ai', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY},
-    body: JSON.stringify({model: 'llama-3.3-70b-versatile', messages: [{role:'system',content:systemPrompt},{role:'user',content:userPrompt}], max_tokens: 1000, temperature: 0.7})
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ systemPrompt, userPrompt })
   });
   const d = await r.json();
-  if (d.error) throw new Error(d.error.message);
-  const text = d.choices && d.choices[0] && d.choices[0].message ? d.choices[0].message.content : null;
-  if (!text) throw new Error('Empty response from Groq');
-  return text;
+  if (!r.ok) throw new Error(d.error || 'Demo AI request failed');
+  if (!d.reply) throw new Error('Empty response from demo AI');
+  return d.reply;
 }
 
 async function api(method, path, body) {
@@ -633,6 +752,7 @@ function goPage(id,el){
   el.classList.add('active');
   if(window.innerWidth<=768)toggleSidebar(true);
   if(id==='quiz'){document.getElementById('vTopics').style.display='block';document.getElementById('vLoading').style.display='none';document.getElementById('vQuestion').style.display='none';document.getElementById('vResult').style.display='none';}
+  if(id==='compiler'){changeLanguage();} // Initialize with default language example
   if(id==='history'){
     currentChatId=null;
     document.getElementById('hChatDetail').style.display='none';
@@ -823,6 +943,348 @@ async function saveQuizToHistory(topic,score,total,timeTaken,questions){
 
 // ── TOAST ─────────────────────────────────────────
 function toast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
+
+// ── CODE CHALLENGES ──────────────────────────────
+let currentProblemId = null;
+
+async function loadProblems() {
+  try {
+    const d = await api('GET', '/api/problems');
+    if (!d || !d.problems) return;
+    
+    const diffColor = { 'Easy': 'var(--teal)', 'Medium': 'var(--gold)', 'Hard': 'var(--red)' };
+    const diffBg = { 'Easy': 'var(--teal-l)', 'Medium': 'var(--gold-l)', 'Hard': 'var(--red-l)' };
+    
+    document.getElementById('problemsGrid').innerHTML = d.problems.map(p => `
+      <div class="topic-card" onclick="loadProblem(${p.id})">
+        <span class="tc-em">🧮</span>
+        <div class="tc-nm">${escHtml(p.title)}</div>
+        <div class="tc-sb">${escHtml(p.description.substring(0, 80))}...</div>
+        <div class="tc-diff" style="background:${diffBg[p.difficulty]};color:${diffColor[p.difficulty]}">${p.difficulty}</div>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error('Load problems error:', err);
+    document.getElementById('problemsGrid').innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text2);">Failed to load problems. '+ err.message +'</div>';
+  }
+}
+
+async function loadProblem(id) {
+  try {
+    const d = await api('GET', '/api/problems/' + id);
+    if (!d) return;
+    
+    currentProblemId = id;
+    document.getElementById('problemTitle').textContent = d.title;
+    const diffColor = { 'Easy': 'var(--teal)', 'Medium': 'var(--gold)', 'Hard': 'var(--red)' };
+    const diffBg = { 'Easy': 'var(--teal-l)', 'Medium': 'var(--gold-l)', 'Hard': 'var(--red-l)' };
+    const diffEl = document.getElementById('problemDiff');
+    diffEl.textContent = d.difficulty;
+    diffEl.style.background = diffBg[d.difficulty];
+    diffEl.style.color = diffColor[d.difficulty];
+    
+    document.getElementById('problemDesc').textContent = d.description;
+    
+    // Render examples
+    document.getElementById('examplesContainer').innerHTML = (d.examples || []).map((ex, i) => `
+      <div style="background:var(--bg);padding:10px;border-radius:var(--r);font-size:12px">
+        <div style="font-weight:600;margin-bottom:3px">Example ${i + 1}:</div>
+        <div style="color:var(--text2);margin-bottom:3px"><strong>Input:</strong> ${escHtml(ex.input)}</div>
+        <div style="color:var(--text2);margin-bottom:3px"><strong>Output:</strong> ${escHtml(ex.output)}</div>
+        <div style="color:var(--text3);font-size:11px"><strong>Explanation:</strong> ${escHtml(ex.explanation)}</div>
+      </div>
+    `).join('');
+    
+    // Load template code
+    document.getElementById('solveCode').value = d.templateCode || '';
+    document.getElementById('testResults').style.display = 'none';
+    
+    // Show solver, hide list
+    document.getElementById('challengeList').style.display = 'none';
+    document.getElementById('challengeSolver').style.display = 'block';
+  } catch (err) {
+    console.error('Load problem error:', err);
+    toast('Failed to load problem: ' + err.message);
+  }
+}
+
+function backToChallenges() {
+  document.getElementById('challengeSolver').style.display = 'none';
+  document.getElementById('challengeList').style.display = 'block';
+  document.getElementById('testResults').style.display = 'none';
+}
+
+async function submitChallenge(event) {
+  if (!currentProblemId) return;
+  
+  try {
+    const d = await api('GET', '/api/problems/' + currentProblemId);
+    if (!d) { toast('Problem not found'); return; }
+    
+    const code = document.getElementById('solveCode').value.trim();
+    if (!code) { toast('Please write some code'); return; }
+    
+    const btn = event?.target || document.querySelector('.analyze-btn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Running tests...';
+    
+    const result = await api('POST', '/api/submit', {
+      code: code,
+      language: 63, // JavaScript
+      testCases: d.testCases
+    });
+    
+    btn.disabled = false;
+    btn.textContent = '▶ Run Tests';
+    
+    // Show results
+    document.getElementById('testResults').style.display = 'block';
+    document.getElementById('passedCount').textContent = result.summary.passed;
+    document.getElementById('totalCount').textContent = result.summary.total;
+    document.getElementById('successRate').textContent = result.summary.successRate + '%';
+    
+    const passedStyle = result.summary.allPassed 
+      ? 'background:var(--teal-l);border:1.5px solid #00c9a730;border-left:3px solid var(--teal);color:#005f50'
+      : 'background:var(--red-l);border:1.5px solid #ff4d6a30;border-left:3px solid var(--red)';
+    
+    document.getElementById('testCasesList').innerHTML = (result.testResults || []).map((tc, i) => {
+      const isPass = tc.passed;
+      const icon = isPass ? '✓' : '✕';
+      const iconColor = isPass ? 'var(--teal)' : 'var(--red)';
+      return `
+        <div style="padding:12px;border-radius:var(--r);background:var(--bg);border:1.5px solid ${isPass ? 'var(--teal-l)' : 'var(--red-l)'}">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <span style="color:${iconColor};font-weight:800;font-size:16px">${icon}</span>
+            <span style="font-weight:700;flex:1">Test Case ${i + 1}</span>
+            <span style="font-size:11px;color:var(--text2)">${isPass ? 'PASSED' : tc.status}</span>
+          </div>
+          <div style="font-size:11px;color:var(--text2);margin-bottom:3px"><strong>Input:</strong> ${escHtml(tc.input)}</div>
+          <div style="font-size:11px;color:var(--text2);margin-bottom:3px"><strong>Expected:</strong> ${escHtml(tc.expected)}</div>
+          <div style="font-size:11px;color:var(--text2);margin-bottom:3px"><strong>Actual:</strong> ${escHtml(tc.actual || 'No output')}</div>
+          ${tc.error ? '<div style="font-size:11px;color:var(--red);background:var(--red-l);padding:6px;border-radius:4px;margin-top:6px"><strong>Error:</strong> ' + escHtml(tc.error) + '</div>' : ''}
+        </div>
+      `;
+    }).join('');
+    
+    if (result.summary.allPassed) {
+      toast('🎉 All tests passed!');
+      addXP(50);
+      incStat(2);
+    } else {
+      toast(result.summary.passed + ' of ' + result.summary.total + ' tests passed');
+    }
+  } catch (err) {
+    const btn = event?.target || document.querySelector('.analyze-btn');
+    btn.disabled = false;
+    btn.textContent = '▶ Run Tests';
+    console.error('Submit error:', err);
+    toast('Error: ' + err.message);
+  }
+}
+
+// ── CODE COMPILER ─────────────────────────────────
+const languageExamples = {
+  63: `// JavaScript Example
+console.log("Hello, World!");
+
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+console.log("Factorial of 5:", factorial(5));`,
+  62: `// Java Example
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        
+        int result = factorial(5);
+        System.out.println("Factorial of 5: " + result);
+    }
+    
+    public static int factorial(int n) {
+        if (n <= 1) return 1;
+        return n * factorial(n - 1);
+    }
+}`,
+  54: `// C++ Example
+#include <iostream>
+using namespace std;
+
+int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int main() {
+    cout << "Hello, World!" << endl;
+    cout << "Factorial of 5: " << factorial(5) << endl;
+    return 0;
+}`,
+  50: `// C Example
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int main() {
+    printf("Hello, World!\\n");
+    printf("Factorial of 5: %d\\n", factorial(5));
+    return 0;
+}`,
+  71: `# Python Example
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print("Hello, World!")
+print(f"Factorial of 5: {factorial(5)}")`,
+  72: `# Ruby Example
+def factorial(n)
+  return 1 if n <= 1
+  n * factorial(n - 1)
+end
+
+puts "Hello, World!"
+puts "Factorial of 5: #{factorial(5)}"`,
+  73: `// Go Example
+package main
+
+import "fmt"
+
+func factorial(n int) int {
+    if n <= 1 {
+        return 1
+    }
+    return n * factorial(n - 1)
+}
+
+func main() {
+    fmt.Println("Hello, World!")
+    fmt.Printf("Factorial of 5: %d\\n", factorial(5))
+}`,
+  74: `// Rust Example
+fn factorial(n: i32) -> i32 {
+    if n <= 1 { 1 } else { n * factorial(n - 1) }
+}
+
+fn main() {
+    println!("Hello, World!");
+    println!("Factorial of 5: {}", factorial(5));
+}`,
+  75: `<?php
+// PHP Example
+function factorial($n) {
+    if ($n <= 1) return 1;
+    return $n * factorial($n - 1);
+}
+
+echo "Hello, World!\\n";
+echo "Factorial of 5: " . factorial(5) . "\\n";
+?>`,
+  76: `// TypeScript Example
+function factorial(n: number): number {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+console.log("Hello, World!");
+console.log(\`Factorial of 5: \${factorial(5)}\`);`,
+  77: `// Kotlin Example
+fun factorial(n: Int): Int {
+    return if (n <= 1) 1 else n * factorial(n - 1)
+}
+
+fun main() {
+    println("Hello, World!")
+    println("Factorial of 5: \${factorial(5)}")
+}`,
+  78: `// Swift Example
+func factorial(_ n: Int) -> Int {
+    return n <= 1 ? 1 : n * factorial(n - 1)
+}
+
+print("Hello, World!")
+print("Factorial of 5: \\(factorial(5))")`,
+  79: `// C# Example
+using System;
+
+class Program {
+    static int Factorial(int n) {
+        return n <= 1 ? 1 : n * Factorial(n - 1);
+    }
+    
+    static void Main() {
+        Console.WriteLine("Hello, World!");
+        Console.WriteLine(\$"Factorial of 5: {Factorial(5)}");
+    }
+}`
+};
+
+function changeLanguage() {
+  const langId = document.getElementById('langSelect').value;
+  const example = languageExamples[langId] || languageExamples[63];
+  document.getElementById('codeEditor').value = example;
+}
+
+async function runCode() {
+  const code = document.getElementById('codeEditor').value.trim();
+  const languageId = document.getElementById('langSelect').value;
+  const btn = document.getElementById('runBtn');
+  const outputArea = document.getElementById('outputArea');
+  
+  if (!code) {
+    toast('Please write some code first');
+    return;
+  }
+  
+  btn.disabled = true;
+  btn.textContent = '⏳ Running...';
+  outputArea.textContent = 'Executing your code...';
+  
+  try {
+    const result = await api('POST', '/api/compile', {
+      code: code,
+      language: parseInt(languageId)
+    });
+    
+    let output = '';
+    if (result.stdout) output += result.stdout;
+    if (result.stderr) output += '\n--- STDERR ---\n' + result.stderr;
+    if (result.compile_output) output += '\n--- COMPILE OUTPUT ---\n' + result.compile_output;
+    
+    if (!output.trim()) output = 'No output produced';
+    
+    outputArea.textContent = output;
+    
+    // Show execution details
+    if (result.status && result.status.id !== 3) {
+      const statusMap = {
+        1: 'IN_QUEUE',
+        2: 'PROCESSING', 
+        3: 'ACCEPTED',
+        4: 'WRONG_ANSWER',
+        5: 'TIME_LIMIT',
+        6: 'COMPILATION_ERROR',
+        7: 'RUNTIME_ERROR',
+        8: 'INTERNAL_ERROR'
+      };
+      outputArea.textContent += `\n\n--- STATUS: ${statusMap[result.status.id] || 'UNKNOWN'} ---`;
+      if (result.time) outputArea.textContent += `\nExecution time: ${result.time}s`;
+      if (result.memory) outputArea.textContent += `\nMemory used: ${result.memory}KB`;
+    }
+    
+  } catch (err) {
+    outputArea.textContent = 'Error: ' + err.message;
+    console.error('Compile error:', err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '▶ Run Code';
+  }
+}
 </script>
 </body>
 </html>
